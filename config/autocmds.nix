@@ -1,27 +1,44 @@
 _: {
   autoCmd = [
     {
-      # Enable spellcheck for some filetypes
       event = "FileType";
       pattern = [
-        "tex"
-        "latex"
-        "markdown"
+        "*.md"
+        "*.tex"
+        "*.txt"
+        "*.typ"
       ];
-      #!TODO: check how to add enxtra langfiles
-      command = "setlocal spell spelllang=en";
+      command = "setlocal spell spelllang=en,pt";
+      desc = "Enable spellcheck.";
     }
     {
-      # Highlight yanked text
       event = "TextYankPost";
       pattern = "*";
-      command = "lua vim.highlight.on_yank({higroup='IncSearch', timeout=50})";
+      callback.__raw = ''
+        function()
+            vim.highlight.on_yank({higroup='IncSearch', timeout=50})
+        end
+      '';
+      desc = "Highlight yanked text.";
     }
     {
-      # Trim trailing whitespace before saving
       event = "BufWritePre";
       pattern = "*";
       command = "silent! %s/\\s\\+$//e";
+      desc = "Trim trailing whitespace on save.";
+    }
+    {
+      event = "BufReadPost";
+      callback.__raw = ''
+        function()
+            local mark = vim.api.nvim_buf_get_mark(0, '"')
+            local lcount = vim.api.nvim_buf_line_count(0)
+            if mark[1] > 0 and mark[1] <= lcount then
+                pcall(vim.api.nvim_win_set_cursor, 0, mark)
+            end
+        end
+      '';
+      desc = "Go to last loc when opening a buffer";
     }
   ];
 }
