@@ -36,6 +36,9 @@
           nvim = nixvim'.makeNixvimWithModule {
             module = import ./config;
             pkgs = import inputs.nixpkgs { inherit system; };
+            extraSpecialArgs = {
+              icons = import ./utils/icons.nix;
+            };
           };
         in
         {
