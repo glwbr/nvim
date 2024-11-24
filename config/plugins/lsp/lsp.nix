@@ -35,6 +35,7 @@ _: {
         jsonls.enable = true;
         lua_ls.enable = true;
         marksman.enable = true;
+        nginx_language_server.enable = true;
         nixd.enable = true;
         phpactor.enable = true;
         ruff.enable = true;
