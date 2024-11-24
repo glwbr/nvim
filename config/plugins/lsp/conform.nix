@@ -39,8 +39,9 @@
         markdown = [ "prettierd" ];
         nix = [ "nixfmt" ];
         php = [
-          "phpstan"
+          "pint"
           "php_cs_fixer"
+          "phpstan"
         ];
         python = [
           "ruff_format"
@@ -78,6 +79,14 @@
         };
         php_cs_fixer = {
           command = "${lib.getExe pkgs.php84Packages.php-cs-fixer}";
+          args = [
+            "fix"
+            "--quiet"
+            "--config=.php-cs-fixer.php"
+            "--using-cache=no"
+            "$FILENAME"
+          ];
+          stdin = false;
         };
         prettierd = {
           command = "${lib.getExe pkgs.prettierd}";
