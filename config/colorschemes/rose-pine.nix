@@ -9,8 +9,8 @@ in
       style = "main"; # "main", "moon", "dawn" or raw lua code
       styles = {
         bold = false;
-        italic = false;
-        transparency = true;
+        italic = true;
+        transparency = false;
       };
       highlightGroups = {
         TelescopeNormal = {
