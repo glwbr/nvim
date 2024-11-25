@@ -1,6 +1,7 @@
 _: {
   imports = [
     ./completion
+    ./core
     ./harpoon
     ./git
     ./lsp
