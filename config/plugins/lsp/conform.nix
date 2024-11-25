@@ -75,10 +75,10 @@
           command = "${lib.getExe pkgs.nixfmt-rfc-style}";
         };
         phpstan = {
-          command = "${lib.getExe pkgs.php84Packages.phpstan}";
+          command = "${lib.getExe pkgs.php83Packages.phpstan}";
         };
         php_cs_fixer = {
-          command = "${lib.getExe pkgs.php84Packages.php-cs-fixer}";
+          command = "${lib.getExe pkgs.php83Packages.php-cs-fixer}";
           args = [
             "fix"
             "--quiet"
