@@ -1,4 +1,5 @@
-_: {
+{ icons, ... }:
+{
   plugins.fidget = {
     enable = true;
     logger = {
@@ -27,7 +28,7 @@ _: {
       display = {
         renderLimit = 16;
         doneTtl = 3;
-        doneIcon = "✔";
+        doneIcon = icons.GitStaged;
         doneStyle = "Constant";
         progressTtl = "math.huge";
         progressIcon = {

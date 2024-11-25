@@ -38,11 +38,11 @@
         lua = [ "stylua" ];
         markdown = [ "prettierd" ];
         nix = [ "nixfmt" ];
-        php = [
-          "pint"
-          "php_cs_fixer"
-          "phpstan"
-        ];
+        php = {
+          __unkeyed-1 = "pint";
+          __unkeyed-2 = "php_cs_fixer";
+          stop_after_first = true;
+        };
         python = [
           "ruff_format"
           "ruff_fix"
@@ -73,9 +73,6 @@
         };
         nixfmt = {
           command = "${lib.getExe pkgs.nixfmt-rfc-style}";
-        };
-        phpstan = {
-          command = "${lib.getExe pkgs.php83Packages.phpstan}";
         };
         php_cs_fixer = {
           command = "${lib.getExe pkgs.php83Packages.php-cs-fixer}";
