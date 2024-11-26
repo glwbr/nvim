@@ -54,13 +54,5 @@ _: {
       vim.api.nvim_create_user_command('JumpBackwards', function()
         return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
       end, {})
-
-      -- vim.keymap.set({ "i", "s" }, "<C-k>", function()
-      --   return vim.snippet.active { direction = 1 } and vim.snippet.jump(1)
-      -- end, { silent = true })
-
-      -- vim.keymap.set({ "i", "s" }, "<C-j>", function()
-      --   return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
-      -- end, { silent = true })
     '';
 }
