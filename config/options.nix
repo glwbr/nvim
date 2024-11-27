@@ -5,7 +5,7 @@ _: {
     # Appearance settings
     # This group of settings controls how the editor looks, including line and column highlighting,
     # status line visibility, scrolling behavior, and color support.
-    colorcolumn = "100";
+    colorcolumn = "120";
     cursorcolumn = false;
     cursorline = false;
     foldcolumn = "0";
@@ -17,6 +17,7 @@ _: {
     title = true;
     titlestring = "%f // nvim";
     wrap = false;
+    sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions";
 
     # Backup and file handling settings
     # These settings manage how files are saved, including backup files, encoding standards, and
