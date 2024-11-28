@@ -3,7 +3,7 @@ _: {
     enable = true;
     settings = {
       background = {
-        light = "latte";
+        light = "macchiato";
         dark = "mocha";
       };
 
@@ -13,7 +13,7 @@ _: {
         percentage = 0.15;
       };
 
-      flavour = "mocha"; # "latte", "mocha", "frappe", "macchiato", "auto"
+      flavour = "macchiato"; # "latte", "mocha", "frappe", "macchiato", "auto"
       no_bold = true;
       no_italic = true;
       # no_underline = false;
@@ -46,8 +46,9 @@ _: {
           virtual_text = {
             errors = [ "italic" ];
             hints = [ "italic" ];
-            warnings = [ "italic" ];
             information = [ "italic" ];
+            ok = [ "italic" ];
+            warnings = [ "italic" ];
           };
 
           underlines = {

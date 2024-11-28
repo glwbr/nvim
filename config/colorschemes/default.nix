@@ -1,5 +1,5 @@
 _: {
   imports = [
-    ./kanagawa.nix
+    ./catppuccin.nix
   ];
 }
