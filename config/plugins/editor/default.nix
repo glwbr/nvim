@@ -1,6 +1,6 @@
 _: {
   imports = [
-    ./auto-session.nix
+    ./persistence.nix
     ./tmux-navigator.nix
   ];
 }
