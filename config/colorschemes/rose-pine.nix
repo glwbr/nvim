@@ -6,25 +6,20 @@ in
   colorschemes.rose-pine = {
     enable = true;
     settings = {
-      style = "main"; # "main", "moon", "dawn" or raw lua code
+      variant = "main";
       styles = {
         bold = false;
         italic = true;
-        transparency = false;
+        transparency = true;
       };
-      highlightGroups = {
-        TelescopeNormal = {
-          bg = lua "require('rose-pine.palette').base";
-          fg = lua "require('rose-pine.palette').surface";
+      highlight_groups = {
+        Comment = {
+          fg = "highlight_med";
         };
-        TelescopeBorder = {
-          bg = lua "require('rose-pine.palette').base";
-          fg = lua "require('rose-pine.palette').surface";
-        };
-        TelescopePreviewTitle = {
-          bg = lua "require('rose-pine.palette').base";
-          fg = lua "require('rose-pine.palette').surface";
-        };
+        # TelescopePreviewTitle = {
+        #   fg = "love";
+        #   bg = "base";
+        # };
       };
     };
   };

@@ -9,7 +9,7 @@ _: {
     cursorcolumn = false;
     cursorline = false;
     foldcolumn = "0";
-    laststatus = 3;
+    laststatus = 2;
     scrolloff = 8;
     signcolumn = "yes";
     showmode = false;

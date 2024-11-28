@@ -13,7 +13,7 @@ _: {
         percentage = 0.15;
       };
 
-      flavour = "macchiato"; # "latte", "mocha", "frappe", "macchiato", "auto"
+      flavour = "mocha"; # "latte", "mocha", "frappe", "macchiato", "auto"
       no_bold = true;
       no_italic = true;
       # no_underline = false;
