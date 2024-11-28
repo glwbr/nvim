@@ -1,5 +1,5 @@
 _: {
   imports = [
-    ./rose-pine.nix
+    ./catppuccin.nix
   ];
 }
