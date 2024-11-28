@@ -4,5 +4,7 @@ _: {
     ./fidget.nix
     ./lsp.nix
     ./lspkind.nix
+    ./otter.nix
+    ./typescript-tools.nix
   ];
 }

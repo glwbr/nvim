@@ -22,7 +22,7 @@ _: {
         shortcut = [
           {
             action.__raw = "function(path) vim.cmd('Telescope find_files') end";
-            desc = "Files";
+            desc = "files";
             group = "Label";
             icon = " ";
             icon_hl = "@variable";

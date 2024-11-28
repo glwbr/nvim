@@ -73,13 +73,13 @@ in
     ] "<C-j>" "<cmd>JumpBackward<CR>" "Jump backward snippet")
 
     # Window management
-    (mkNormap "<C-k>" "<C-w><C-k>" "Move to window above")
-    (mkNormap "<C-j>" "<C-w><C-j>" "Move to window below")
-    (mkNormap "<C-h>" "<C-w><C-h>" "Move to window left")
-    (mkNormap "<C-l>" "<C-w><C-l>" "Move to window right")
-    (mkNormap "<C-Up>" ":resize +2<CR>" "Increase window height")
-    (mkNormap "<C-Down>" ":resize -2<CR>" "Decrease window height")
-    (mkNormap "<C-Left>" ":vertical resize -2<CR>" "Decrease window width")
-    (mkNormap "<C-Right>" ":vertical resize +2<CR>" "Increase window width")
+    (mkNormap "<C-k>" "<C-w><C-k>" "Move to the Upper Split")
+    (mkNormap "<C-j>" "<C-w><C-j>" "Move to the Bottom Split")
+    (mkNormap "<C-h>" "<C-w><C-h>" "Move to the Left Split")
+    (mkNormap "<C-l>" "<C-w><C-l>" "Move to the Right Split")
+    (mkNormap "<C-Down>" ":resize +2<CR>" "Increase Split Height")
+    (mkNormap "<C-Up>" ":resize -2<CR>" "Decrease Split Height")
+    (mkNormap "<C-Left>" ":vertical resize -2<CR>" "Decrease Window Width")
+    (mkNormap "<C-Right>" ":vertical resize +2<CR>" "Increase Window Width")
   ];
 }

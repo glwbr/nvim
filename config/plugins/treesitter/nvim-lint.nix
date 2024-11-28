@@ -1,26 +1,60 @@
-{ pkgs, ... }:
 {
-  extraPackages = with pkgs; [
-    golangci-lint
-    eslint_d
-    nodePackages.jsonlint
-    selene
-    statix
-    yamllint
-  ];
-
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  lsp = config.plugins.lsp.servers;
+in
+{
   plugins.lint = {
     enable = true;
+
     lintersByFt = {
-      go = [ "golangci-lint" ];
-      javascript = [ "eslint_d" ];
-      javascriptreact = [ "eslint_d" ];
+      docker = [ "hadolint" ];
+      golangcilint = [ "golangcilint" ];
+      javascript = lib.mkIf (!lsp.eslint.enable) [ "eslint_d" ];
+      javascriptreact = lib.optionals (!lsp.eslint.enable) [ "eslint_d" ];
       json = [ "jsonlint" ];
       lua = [ "selene" ];
-      nix = [ "statix" ];
-      typescript = [ "eslint_d" ];
-      typescriptreact = [ "eslint_d" ];
+      nix = [
+        "deadnix"
+        "nix"
+      ] ++ lib.optionals (!lsp.statix.enable) [ "statix" ];
+      typescript = lib.optionals (!lsp.eslint.enable) [ "eslint_d" ];
+      typescriptreact = lib.optionals (!lsp.eslint.enable) [ "eslint_d" ];
       yaml = [ "yamllint" ];
+    };
+
+    linters = {
+      #biome = {
+      #  cmd = lib.getExe pkgs.biome;
+      #};
+      deadnix = {
+        cmd = lib.getExe pkgs.deadnix;
+      };
+      eslint_d = lib.mkIf (!lsp.eslint.enable) {
+        cmd = lib.getExe pkgs.eslint_d;
+      };
+      golangcilint = {
+        cmd = lib.getExe pkgs.golangci-lint;
+      };
+      hadolint = {
+        cmd = lib.getExe pkgs.hadolint;
+      };
+      jsonlint = {
+        cmd = lib.getExe' pkgs.nodePackages.jsonlint "jsonlint";
+      };
+      selene = {
+        cmd = lib.getExe pkgs.selene;
+      };
+      statix = {
+        cmd = lib.getExe pkgs.statix;
+      };
+      yamllint = {
+        cmd = lib.getExe pkgs.yamllint;
+      };
     };
   };
 }

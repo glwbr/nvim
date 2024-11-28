@@ -21,9 +21,11 @@ _: {
       snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
 
       performance = {
-        debounce = 60;
-        fetchingTimeout = 200;
-        maxViewEntries = 30;
+        debounce = 0;
+        throttle = 0;
+        fetching_timeout = 5;
+        confirm_resolve_timeout = 80;
+        max_view_entries = 20;
       };
 
       sources = [
@@ -36,18 +38,20 @@ _: {
         }
         { name = "copilot"; }
         {
-          keyword_length = 3;
+          keyword_length = 2;
           name = "path";
         }
       ];
 
+      view.docs.auto_open = false;
+
       window = {
         completion = {
-          winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
-          scrollbar = false;
+          #border = "none";
           col_offset = -3;
-          sidePadding = 0;
-          # border = ["┌" "─" "┐" "│" "┘" "─" "└" "│"];
+          side_padding = 0;
+          scrollbar = false;
+          winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
           border = [
             "╭"
             "─"
@@ -61,6 +65,9 @@ _: {
         };
 
         documentation = {
+          #border = "none";
+          col_offset = 0;
+          side_padding = 0;
           border = [
             "╭"
             "─"
@@ -71,13 +78,11 @@ _: {
             "╰"
             "│"
           ];
-          # border = ["┌" "─" "┐" "│" "┘" "─" "└" "│"];
           winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
         };
       };
 
       formatting = {
-        # fields = ["abbr" "kind" "menu"];
         fields = [
           "kind"
           "abbr"

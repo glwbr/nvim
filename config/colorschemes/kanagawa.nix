@@ -3,7 +3,7 @@ _: {
     enable = true;
     settings = {
       theme = "wave";
-      transparent = false;
+      transparent = true;
     };
   };
 }

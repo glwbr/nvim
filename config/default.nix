@@ -8,10 +8,6 @@ _: {
     ./options.nix
   ];
 
-  config = {
-    withNodeJs = false;
-    withPerl = false;
-    withPython3 = false;
-    withRuby = false;
-  };
+  withPython3 = false;
+  withRuby = false;
 }

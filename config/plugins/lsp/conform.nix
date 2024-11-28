@@ -3,38 +3,67 @@
   plugins.conform-nvim = {
     enable = true;
     settings = {
-      format_on_save = {
-        lspFallback = true;
-        timeoutMs = 500;
-      };
       log_level = "error";
       notify_on_error = true;
       notify_no_formatters = true;
 
+      #format_on_save =
+      #  # lua
+      #  ''
+      #    function(bufnr)
+      #      local ignore_filetypes = { "sql" }
+      #      if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+      #        return
+      #      end
+
+      #      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+      #        return
+      #      end
+
+      #      local bufname = vim.api.nvim_buf_get_name(bufnr)
+      #      if bufname:match("/node_modules/") then
+      #        return
+      #      end
+
+      #      return { timeout_ms = 500, lsp_format = "fallback" }
+      #    end
+      #  '';
+
+      format_after_save =
+        # lua
+        ''
+          function(bufnr)
+            local ignore_filetypes = { "sql" }
+            if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+              return
+            end
+
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+              return
+            end
+
+            local bufname = vim.api.nvim_buf_get_name(bufnr)
+            if bufname:match("/node_modules/") then
+              return
+            end
+
+            return { lsp_format = "fallback" }
+          end
+        '';
+
       formatters_by_ft = {
         "_" = [ "trim_whitespace" ];
-        css = [
-          "prettierd"
-          "prettier"
-        ];
+        css = [ "prettierd" ];
         go = [
+          "golangcilint"
           "goimports"
           "golines"
           "gofumpt"
         ];
-        html = [
-          "prettierd"
-          "prettier"
-        ];
-        javascript = [
-          "prettierd"
-          "prettier"
-        ];
-        javascriptreact = [
-          "prettierd"
-          "prettier"
-        ];
-        json = [ "jq" ];
+        html = [ "prettierd" ];
+        javascript = [ "dprint" ];
+        javascriptreact = [ "dprint" ];
+        json = [ "prettierd" ];
         lua = [ "stylua" ];
         markdown = [ "prettierd" ];
         nix = [ "nixfmt" ];
@@ -47,23 +76,17 @@
           "ruff_format"
           "ruff_fix"
         ];
-        typescript = [
-          "prettierd"
-          "prettier"
-        ];
-        typescriptreact = [
-          "prettierd"
-          "prettier"
-        ];
-        yaml = [
-          "prettierd"
-          "prettier"
-        ];
+        typescript = [ "dprint" ];
+        typescriptreact = [ "dprint" ];
+        yaml = [ "prettierd" ];
       };
 
       formatters = {
-        jq = {
-          command = "${lib.getExe pkgs.jq}";
+        dprint = {
+          command = "${lib.getExe pkgs.dprint}";
+        };
+        golangcilint = {
+          command = "${lib.getExe pkgs.golangci-lint}";
         };
         golines = {
           command = "${lib.getExe' pkgs.golines "golines"}";
