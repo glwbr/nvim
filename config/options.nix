@@ -1,5 +1,24 @@
-_: {
-  clipboard.providers.wl-copy.enable = true;
+{ pkgs, ... }:
+{
+  clipboard.providers = {
+    wl-copy = {
+      enable = true;
+      package = pkgs.wl-clipboard;
+    };
+  };
+
+  diagnostics = {
+    float = {
+      border = "rounded";
+    };
+    jump = {
+      severity.__raw = "vim.diagnostic.severity.WARN";
+    };
+    severity_sort = true;
+    underline = true;
+    update_in_insert = false;
+    virtual_text = true;
+  };
 
   opts = {
     # Appearance settings
@@ -99,6 +118,13 @@ _: {
     # Update time settings
     # This setting controls how often the editor writes swap files and triggers the CursorHold event, which
     # affects responsiveness, especially in environments with heavy plugins or large files.
-    updatetime = 50;
+    updatetime = 100;
+  };
+
+  performance.byteCompileLua = {
+    enable = true;
+    nvimRuntime = true;
+    configs = true;
+    plugins = true;
   };
 }

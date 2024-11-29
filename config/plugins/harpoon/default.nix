@@ -4,13 +4,13 @@ _: {
     enableTelescope = true;
     keymapsSilent = true;
     keymaps = {
-      addFile = "<leader>a";
-      toggleQuickMenu = "<C-e>";
+      addFile = "<leader>ha";
+      toggleQuickMenu = "<leader>he";
       navFile = {
-        "1" = "<C-1>";
-        "2" = "<C-2>";
-        "3" = "<C-3>";
-        "4" = "<C-4>";
+        "1" = "<leader>hj";
+        "2" = "<leader>hk";
+        "3" = "<leader>hl";
+        "4" = "<leader>hm";
       };
     };
   };

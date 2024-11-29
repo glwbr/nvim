@@ -16,16 +16,10 @@ _: {
       pattern = "*";
       callback.__raw = ''
         function()
-            vim.highlight.on_yank({higroup='IncSearch', timeout=50})
+                                                        vim.highlight.on_yank({higroup='IncSearch', timeout=50})
         end
       '';
       desc = "Highlight yanked text.";
-    }
-    {
-      event = "BufWritePre";
-      pattern = "*";
-      command = "silent! %s/\\s\\+$//e";
-      desc = "Trim trailing whitespace on save.";
     }
     {
       event = "BufReadPost";
@@ -54,6 +48,29 @@ _: {
         end
       '';
       desc = "Set tabstop and shiftwidth for specific filetypes.";
+    }
+    {
+      event = "FileType";
+      pattern = "help";
+      command = "wincmd L";
+      desc = "Open help in a vertical split.";
+    }
+    {
+      event = "BufWritePre";
+      pattern = [
+        "*.tsx"
+        "*.ts"
+        "*.jsx"
+        "*.js"
+      ];
+      command = "silent! EslintFixAll";
+      desc = "run eslint before saving";
+    }
+    {
+      event = [ "FileType" ];
+      pattern = "TelescopePrompt";
+      command = "inoremap <buffer><silent> <ESC> <ESC>:close!<CR>";
+      desc = "Close telescope prompt in insert mode with escape.";
     }
   ];
 }

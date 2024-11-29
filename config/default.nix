@@ -8,8 +8,6 @@ _: {
     ./options.nix
   ];
 
-  withNodeJs = false;
-  withPerl = false;
   withPython3 = false;
   withRuby = false;
 }
