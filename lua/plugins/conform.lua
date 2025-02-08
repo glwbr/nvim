@@ -20,8 +20,10 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       nix = { 'nixfmt' },
-      typescriptreact = { 'eslint_d', 'prettierd' },
-      javascriptreact = { 'eslint_d', 'prettierd' },
+      javascript = { 'prettierd' },
+      javascriptreact = { 'prettierd' },
+      typescript = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
       markdown = function(bufnr)
         return { utils.first(bufnr, 'prettierd', 'prettier'), 'injected' }
       end,
