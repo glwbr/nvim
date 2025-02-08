@@ -22,8 +22,10 @@ return {
     {
       'folke/lazydev.nvim',
       ft = 'lua',
+      cmd = 'LazyDev',
       opts = {
         library = {
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
           { path = (nixCats.nixCatsPath or '') .. '/lua', words = { 'nixCats' } },
         },
       },
@@ -35,11 +37,24 @@ return {
         lua_ls = {
           settings = {
             Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
               completion = {
                 callSnippet = 'Replace',
               },
+              doc = {
+                privateName = { '^_' },
+              },
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = 'Disable',
+                semicolon = 'Disable',
+                arrayIndex = 'Disable',
+              },
               diagnostics = {
-                globals = { 'nixCats' },
                 disable = { 'missing-fields' },
               },
             },
@@ -52,7 +67,6 @@ return {
     }
   end,
   config = function(_, opts)
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
     local lspconfig = require 'lspconfig'
 
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -63,12 +77,12 @@ return {
           return
         end
 
-        map('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]eclaration' })
         map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
         map('n', 'gd', require('telescope.builtin').lsp_definitions, { desc = '[G]oto [D]efinition' })
+        map('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]eclaration' })
+        map('n', 'gi', require('telescope.builtin').lsp_implementations, { desc = '[G]oto [I]mplementation' })
         map('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences' })
-        map('n', 'gI', require('telescope.builtin').lsp_implementations, { desc = '[G]oto [I]mplementation' })
-        map('n', '<leader>D', require('telescope.builtin').lsp_type_definitions, { desc = 'Type [D]efinition' })
+        map('n', 'gt', require('telescope.builtin').lsp_type_definitions, { desc = '[G]oto [T]ype' })
         map('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
         map(
           'n',
@@ -76,8 +90,8 @@ return {
           require('telescope.builtin').lsp_dynamic_workspace_symbols,
           { desc = '[W]orkspace [S]ymbols' }
         )
-        map('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
         map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
+        map('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
 
         if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
           map('n', '<leader>th', function()
@@ -112,13 +126,8 @@ return {
 
     if cats.isNixCats then
       for server, config in pairs(opts.servers) do
-        lspconfig[server].setup {
-          capabilities = capabilities,
-          settings = config.settings,
-          filetypes = config.filetypes,
-          cmd = config.cmd,
-          root_pattern = config.root_pattern,
-        }
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
       end
     else
       require('mason').setup()
@@ -131,10 +140,11 @@ return {
       require('mason-lspconfig').setup {
         automatic_installation = cats.ifNotNix(true),
         handlers = {
-          function(server_name)
-            local server = opts.servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            lspconfig[server_name].setup(server)
+          function(server)
+            local config = opts.servers[server] or {}
+            local capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+            config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+            lspconfig[server].setup(config)
           end,
         },
       }
