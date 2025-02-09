@@ -22,30 +22,46 @@
         extraWrapperArgs = { };
 
         lspsAndRuntimeDeps = with pkgs; {
-          general = {
-            core = [ universal-ctags ripgrep fd ];
-            debug = [ delve ];
-            lua = [ lua-language-server stylua ];
+          core = [ universal-ctags ripgrep fd ];
+          languages = {
+            go = { debug = [ delve ]; };
+            lua = [ lua-language-server selene stylua ];
             nix = [ nix nixd nixfmt-classic ];
             web = {
-              # html = [vscode-langservers-extracted];
+              markdown = [ markdownlint-cli ];
               javascript = [ eslint_d prettierd typescript-language-server ];
+              json = with nodePackages; [ jsonlint ];
             };
           };
         };
 
         startupPlugins = with pkgs.vimPlugins; {
-          general = {
-            core = [
-              conform-nvim
-              nvim-lspconfig
-              nvim-lint
-              nvim-treesitter.withAllGrammars
-              plenary-nvim
-              lazy-nvim
-            ];
-            qol = [ todo-comments-nvim ];
-          };
+          essential = [
+            lazy-nvim
+            nvim-lspconfig
+            nvim-treesitter.withAllGrammars
+            plenary-nvim
+          ];
+
+          navigationAndWorkflow = [
+            harpoon2
+            telescope-fzf-native-nvim
+            telescope-nvim
+            telescope-ui-select-nvim
+          ];
+
+          qualityOfLife = [
+            blink-cmp
+            conform-nvim
+            fidget-nvim
+            gitsigns-nvim
+            nvim-lint
+            todo-comments-nvim
+          ];
+
+          pluginUtilities = [ friendly-snippets lazydev-nvim ];
+
+          ui = [ nvim-web-devicons rose-pine ];
         };
 
         optionalPlugins = { };
@@ -57,8 +73,17 @@
             wrapRc = true;
             aliases = [ "v" ];
           };
+
           categories = {
-            general = true;
+            core = true;
+            languages = true;
+
+            essential = true;
+            navigationAndWorkflow = true;
+            qualityOfLife = true;
+            pluginUtilities = true;
+            ui = true;
+
             have_nerd_font = true;
           };
         };
