@@ -71,6 +71,6 @@ opt.updatetime = 200                        			-- Set time to wait before trigge
 
 -- Session Management
 opt.sessionoptions = { 
-    "buffers", "curdir", "tabpages", "winsize", 
-    "help", "globals", "skiprtp", "folds" 
+  "buffers", "curdir", "tabpages", "winsize", 
+  "help", "globals", "skiprtp", "folds" 
 }
