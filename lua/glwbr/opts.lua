@@ -1,5 +1,18 @@
 local opt = vim.opt
 
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+vim.g.netrw_liststyle = 3
+vim.g.netrw_sort_sequence = '[\\/]*'
+vim.g.netrw_sort_by = 'name'
+vim.g.netrw_sort_direction = 'asc'
+
 -- UI and Visual Enhancements
 opt.cursorline = true                       			-- Highlight current line
 opt.number = true                           			-- Show line numbers
