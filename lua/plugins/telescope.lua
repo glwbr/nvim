@@ -1,4 +1,4 @@
-local cats = require 'utils.cats'
+local catUtils = require 'utils.cats'
 local utils = require 'utils'
 local map = utils.map
 
@@ -12,8 +12,8 @@ return {
     'nvim-lua/plenary.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      build = cats.ifNotNix 'make',
-      cond = cats.ifNotNix(function()
+      build = catUtils.ifNotNix 'make',
+      cond = catUtils.ifNotNix(function()
         return vim.fn.executable 'make' == 1
       end),
     },

@@ -1,5 +1,5 @@
 local utils = require 'utils'
-local cats = require 'utils.cats'
+local catUtils = require 'utils.cats'
 local map = utils.map
 
 return {
@@ -7,16 +7,16 @@ return {
   dependencies = {
     {
       'williamboman/mason.nvim',
-      enabled = cats.ifNotNix(true),
+      enabled = catUtils.ifNotNix(true),
       config = true,
     },
     {
       'williamboman/mason-lspconfig.nvim',
-      enabled = cats.ifNotNix(true),
+      enabled = catUtils.ifNotNix(true),
     },
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      enabled = cats.ifNotNix(true),
+      enabled = catUtils.ifNotNix(true),
     },
     { 'j-hui/fidget.nvim', opts = {} },
     {
@@ -124,7 +124,7 @@ return {
       end,
     })
 
-    if cats.isNixCats then
+    if catUtils.isNixCats then
       for server, config in pairs(opts.servers) do
         config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
         lspconfig[server].setup(config)
@@ -138,7 +138,7 @@ return {
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        automatic_installation = cats.ifNotNix(true),
+        automatic_installation = catUtils.ifNotNix(true),
         handlers = {
           function(server)
             local config = opts.servers[server] or {}

@@ -1,10 +1,10 @@
-local utils = require 'utils.cats'
+local catUtils = require 'utils.cats'
 
 return {
   'nvim-treesitter/nvim-treesitter',
-  build = utils.ifNotNix ':TSUpdate',
+  build = catUtils.ifNotNix ':TSUpdate',
   opts = {
-    ensure_installed = utils.ifNotNix {
+    ensure_installed = catUtils.ifNotNix {
       'bash',
       'c',
       'diff',
@@ -15,7 +15,7 @@ return {
       'vim',
       'vimdoc',
     },
-    auto_install = utils.ifNotNix(true),
+    auto_install = catUtils.ifNotNix(true),
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = { 'ruby' },
