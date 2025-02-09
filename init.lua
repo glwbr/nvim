@@ -1,6 +1,4 @@
-require('utils.cats').setup {
-  non_nix_value = true,
-}
+require('utils.cats').setup { non_nix_value = true }
 
 require 'glwbr'
 
