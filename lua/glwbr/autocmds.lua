@@ -4,35 +4,35 @@ end
 
 -- check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
-  group = augroup('checktime'),
+  group = augroup 'checktime',
   callback = function()
     if vim.o.buftype ~= 'nofile' then
-      vim.cmd('checktime')
+      vim.cmd 'checktime'
     end
   end,
 })
 
 -- highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = augroup('highlight_yank'),
+  group = augroup 'highlight_yank',
   callback = function()
-    (vim.hl or vim.highlight).on_yank({ timeout = 50 })
+    (vim.hl or vim.highlight).on_yank { timeout = 50 }
   end,
 })
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ 'VimResized' }, {
-  group = augroup('resize_splits'),
+  group = augroup 'resize_splits',
   callback = function()
     local current_tab = vim.fn.tabpagenr()
-    vim.cmd('tabdo wincmd =')
+    vim.cmd 'tabdo wincmd ='
     vim.cmd('tabnext ' .. current_tab)
   end,
 })
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
-  group = augroup('last_loc'),
+  group = augroup 'last_loc',
   callback = function(event)
     local exclude = { 'gitcommit' }
     local buf = event.buf
