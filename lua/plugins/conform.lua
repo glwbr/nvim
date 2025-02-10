@@ -20,6 +20,7 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       nix = { 'nixfmt' },
+      json = { 'prettierd' },
       javascript = { 'prettierd' },
       javascriptreact = { 'prettierd' },
       typescript = { 'prettierd' },
