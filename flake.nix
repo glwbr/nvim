@@ -61,7 +61,7 @@
 
           pluginUtilities = [ friendly-snippets lazydev-nvim ];
 
-          ui = [ nvim-web-devicons rose-pine ];
+          ui = [ catppuccin-nvim nvim-web-devicons rose-pine ];
         };
 
         optionalPlugins = { };
