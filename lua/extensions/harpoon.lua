@@ -16,6 +16,9 @@ M.toggle_telescope = function(harpoon_files)
       },
       previewer = conf.file_previewer {},
       sorter = conf.generic_sorter {},
+      layout_config = {
+        height = 0.5,
+      },
     })
     :find()
 end
