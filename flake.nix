@@ -1,5 +1,5 @@
 {
-  description = "A neovim flake, built with categories in mind.";
+  description = "My neovim fla(ke|vour).";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
