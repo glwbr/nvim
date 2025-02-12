@@ -1,76 +1,86 @@
+vim.diagnostic.config {
+  virtual_text = false,                       -- Disable inline diagnostic messages
+  signs = true,                               -- Show diagnostic signs in sign column
+  underline = true,                           -- Underline diagnostic locations
+  update_in_insert = false,                   -- Don't update diagnostics in insert mode
+  severity_sort = true,                       -- Sort diagnostics by severity
+}
+
+-- Enable undercurl support in terminal
+vim.cmd [[let &t_Cs = "\e[4:3m"]]
+vim.cmd [[let &t_Ce = "\e[4:0m"]]
+
+-- Netrw file explorer settings
+vim.g.netrw_liststyle = 3                     -- Tree style listing
+vim.g.netrw_sort_by = 'name'                  -- Sort files by name
+
 local opt = vim.opt
 
-vim.diagnostic.config({
-  virtual_text = false,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-})
+-- Line display and numbering
+opt.cursorline = true                         -- Highlight current line
+opt.number = true                             -- Show line numbers
+opt.relativenumber = true                     -- Show relative line numbers
+opt.colorcolumn = '120'                       -- Show column marker
+opt.wrap = false                              -- Disable line wrapping
 
-vim.g.netrw_liststyle = 3
-vim.g.netrw_sort_sequence = '[\\/]*'
-vim.g.netrw_sort_by = 'name'
-vim.g.netrw_sort_direction = 'asc'
+-- Status and command line
+opt.cmdheight = 0                             -- Minimize command line height
+opt.laststatus = 3                            -- Global status line
+opt.showmode = false                          -- Hide mode indicator
+opt.signcolumn = 'yes'                        -- Always show sign column
 
--- UI and Visual Enhancements
-opt.cursorline = true                       			-- Highlight current line
-opt.number = true                           			-- Show line numbers
-opt.relativenumber = true                   			-- Show relative line numbers
-opt.colorcolumn = "120"                     			-- Show column marker at 120 characters
-opt.cmdheight = 0                           			-- Minimize command line height
-opt.laststatus = 3                          			-- Always show the status line
-opt.signcolumn = "yes"                      			-- Always show the sign column
-opt.showmode = false                        			-- Disable mode display in command line
-opt.termguicolors = true                    			-- Enable true color support
-opt.list = true                             			-- Show some invisible characters
+-- Colors and visual indicators
+opt.termguicolors = true                      -- Enable true color support
+opt.list = true                               -- Show invisible characters
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-opt.smoothscroll = true
+opt.smoothscroll = true                       -- Smooth scrolling
 
--- Scroll and Window Behavior
-opt.scrolloff = 8                           			-- Lines to keep above and below cursor
-opt.sidescrolloff = 8                       			-- Columns of context
-opt.winminwidth = 5                         			-- Minimum window width
-opt.foldlevel = 99
+-- Scroll and viewport
+opt.scrolloff = 8                             -- Keep lines visible above/below cursor
+opt.sidescrolloff = 8                         -- Keep columns visible left/right
+opt.winminwidth = 5                           -- Minimum window width
+opt.foldlevel = 99                            -- Start with all folds open
 
--- Popup Menu Configuration
-opt.pumblend = 10                           			-- Popup menu transparency
-opt.pumheight = 10                          			-- Maximum number of entries in a popup
-opt.completeopt = "menu,menuone,noselect"   			-- Configure completion options
+-- Popup and completion
+opt.pumblend = 10                             -- Popup menu transparency
+opt.pumheight = 10                            -- Maximum popup menu height
+opt.completeopt = 'menu,menuone,noselect'
 
--- Search and Case Sensitivity
-opt.hlsearch = true                         			-- Highlight search results
-opt.ignorecase = true                       			-- Ignore case in search patterns
-opt.smartcase = true                        			-- Override ignorecase if search contains uppercase
-opt.grepformat = "%f:%l:%c:%m"              			-- Format for 'grep' results
-opt.grepprg = "rg --vimgrep"                			-- Use ripgrep for searching
+opt.hlsearch = true                           -- Highlight search results
+opt.ignorecase = true                         -- Case-insensitive search
+opt.smartcase = true                          -- Case-sensitive if uppercase present
+opt.grepformat = '%f:%l:%c:%m'                -- Grep output format
+opt.grepprg = 'rg --vimgrep'                  -- Use ripgrep for searching
 
--- File Handling and Persistence
-opt.backup = false                          			-- Disable backup files
-opt.swapfile = false                        			-- Disable swap files
-opt.encoding = "utf-8"                      			-- Set file encoding
-opt.fileencoding = "utf-8"                  			-- Set file encoding (for reading/writing files)
-opt.undofile = true                         			-- Enable undo file persistence
-opt.undolevels = 10000                      			-- Set the number of undo levels
+-- File management
+opt.backup = false                            -- Disable backup files
+opt.swapfile = false                          -- Disable swap files
+opt.undofile = true                           -- Enable persistent undo
+opt.undolevels = 10000                        -- Maximum number of changes to remember
 
--- Indentation and Whitespace
-opt.tabstop = 4                             			-- Set the number of spaces for a tab
-opt.shiftwidth = 4                          			-- Set indentation width
-opt.softtabstop = 4                         			-- Set soft tab width
-opt.expandtab = true                        			-- Use spaces instead of tabs
-opt.wrap = false                            			-- Disable line wrapping
+-- Encoding
+opt.encoding = 'utf-8'                        -- Internal encoding
+opt.fileencoding = 'utf-8'                    -- File encoding
 
--- Split and Window Management
-opt.splitright = true                       			-- Split windows to the right
-opt.splitbelow = true                       			-- Split windows below
-opt.splitkeep = "screen"                    			-- Keep split windows' screen position
+opt.tabstop = 4                               -- Spaces per tab
+opt.shiftwidth = 4                            -- Spaces per indent
+opt.softtabstop = 4                           -- Spaces per tab when editing
+opt.expandtab = true                          -- Use spaces instead of tabs
 
--- Timing and Responsiveness
-opt.timeoutlen = 300                        			-- Set timeout length for key sequences
-opt.updatetime = 200                        			-- Set time to wait before triggering events
+opt.splitright = true                         -- Open vertical splits to the right
+opt.splitbelow = true                         -- Open horizontal splits below
+opt.splitkeep = 'screen'                      -- Maintain split screen position
 
--- Session Management
-opt.sessionoptions = { 
-  "buffers", "curdir", "tabpages", "winsize", 
-  "help", "globals", "skiprtp", "folds" 
+opt.timeoutlen = 300                          -- Time to wait for mapped sequence
+opt.updatetime = 200                          -- Faster completion
+
+opt.sessionoptions = {
+  'buffers',                                  -- Save buffer list
+  'curdir',                                   -- Save current directory
+  'tabpages',                                 -- Save tab pages
+  'winsize',                                  -- Save window sizes
+  'help',                                     -- Save help windows
+  'globals',                                  -- Save global variables
+  'skiprtp',                                  -- Don't save runtime path
+  'folds'                                     -- Save folds
 }
