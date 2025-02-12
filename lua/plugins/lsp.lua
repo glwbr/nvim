@@ -90,7 +90,7 @@ return {
           require('telescope.builtin').lsp_dynamic_workspace_symbols,
           { desc = '[W]orkspace [S]ymbols' }
         )
-        map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
+        map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
         map('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
 
         if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
