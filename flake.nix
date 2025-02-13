@@ -44,7 +44,10 @@
           ];
 
           navigationAndWorkflow = [
-            harpoon2
+            {
+              plugin = harpoon2;
+              name = "harpoon";
+            }
             telescope-fzf-native-nvim
             telescope-nvim
             telescope-ui-select-nvim
