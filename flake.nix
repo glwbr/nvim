@@ -36,7 +36,7 @@
         };
 
         startupPlugins = with pkgs.vimPlugins; {
-          essential = [
+          core = [
             lazy-nvim
             nvim-lspconfig
             nvim-treesitter.withAllGrammars
@@ -78,7 +78,6 @@
             core = true;
             languages = true;
 
-            essential = true;
             navigationAndWorkflow = true;
             qualityOfLife = true;
             pluginUtilities = true;
