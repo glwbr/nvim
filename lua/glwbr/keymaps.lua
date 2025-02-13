@@ -49,6 +49,7 @@ map('n', '<leader>y', '"+y', { desc = 'Yank to clipboard' })
 map('v', '<leader>y', '"+y', { desc = 'Yank to clipboard' })
 map('n', '<leader>Y', '"+Y', { desc = 'Yank Line to clipboard' })
 map('x', '<leader>p', '"_dP', { desc = 'Paste over selection (no clipboard)' })
+map('n', 'x', '"_x', { desc = 'Delete char (no clipboard)' })
 map('n', 'J', 'mzJ`z', { desc = 'Join Lines' })
 
 -- Utility Keymaps
