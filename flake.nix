@@ -75,6 +75,9 @@
           settings = {
             wrapRc = true;
             aliases = [ "v" ];
+            withNodeJs = false;
+            withRuby = false;
+            withPython3 = false;
           };
 
           categories = {
