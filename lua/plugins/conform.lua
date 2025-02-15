@@ -25,6 +25,7 @@ return {
       javascriptreact = { 'prettierd' },
       typescript = { 'prettierd' },
       typescriptreact = { 'prettierd' },
+      ['_'] = { 'trim_whitespace' },
       markdown = function(bufnr)
         return { utils.first(bufnr, 'prettierd', 'prettier'), 'injected' }
       end,
