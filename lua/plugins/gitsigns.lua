@@ -13,6 +13,7 @@ return {
     },
     current_line_blame_formatter = '<author> • <author_time:%R> <summary>',
     current_line_blame_formatter_nc = 'Uncommitted changes',
+    numhl = true,
     preview_config = {
       border = 'none',
       style = 'minimal',
