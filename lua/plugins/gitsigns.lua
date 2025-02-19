@@ -8,6 +8,9 @@ return {
   enabled = catUtils.enableForCategory 'qualityOfLife',
   opts = {
     current_line_blame = true,
+    current_line_blame_opts = {
+      delay = 500,
+    },
     current_line_blame_formatter = '<author> • <author_time:%R> <summary>',
     current_line_blame_formatter_nc = 'Uncommitted changes',
     signs = {
@@ -19,26 +22,32 @@ return {
       untracked = { text = '│' },
     },
     on_attach = function()
-      local gitsigns = require 'gitsigns'
+      local gs = require 'gitsigns'
 
-      map('n', ']c', function()
+      map('n', 'gj', function()
         if vim.wo.diff then
-          vim.cmd.normal { ']c', bang = true }
+          vim.cmd.normal { 'gj', bang = true }
         else
-          gitsigns.nav_hunk 'next'
+          gs.nav_hunk 'next'
         end
-      end, { desc = 'Jump to next git [c]hange' })
+      end, { desc = 'Jump to next git change' })
 
-      map('n', '[c', function()
+      map('n', 'gk', function()
         if vim.wo.diff then
-          vim.cmd.normal { '[c', bang = true }
+          vim.cmd.normal { 'gk', bang = true }
         else
-          gitsigns.nav_hunk 'prev'
+          gs.nav_hunk 'prev'
         end
-      end, { desc = 'Jump to previous git [c]hange' })
+      end, { desc = 'Jump to previous git change' })
 
-      map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-      map('n', '<leader>td', gitsigns.preview_hunk_inline, { desc = '[T]oggle git show [D]eleted' })
+      map('n', '<leader>gD', gs.diffthis, { desc = 'Diff' })
+      map('n', '<leader>gp', gs.preview_hunk_inline, { desc = 'Preview changes' })
+      map('v', '<leader>gu', function()
+        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      end, { desc = 'Undo staged hunk' })
+      map('v', '<leader>gs', function()
+        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      end, { desc = 'Stage selected hunk' })
     end,
   },
 }
