@@ -34,6 +34,7 @@ return {
   opts = function()
     return {
       servers = {
+        dockerls = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -42,6 +43,9 @@ return {
               },
               completion = {
                 callSnippet = 'Replace',
+              },
+              codeLens = {
+                enable = true,
               },
               doc = {
                 privateName = { '^_' },
@@ -81,8 +85,6 @@ return {
     }
   end,
   config = function(_, opts)
-    local lspconfig = require 'lspconfig'
-
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       callback = function(event)
@@ -107,13 +109,13 @@ return {
         map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
         map('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
 
-        if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+        if client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) and vim.lsp.inlay_hint then
           map('n', '<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
           end, { desc = '[T]oggle Inlay [H]ints' })
         end
 
-        if client.server_capabilities.documentHighlightProvider then
+        if client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
           local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
@@ -138,9 +140,13 @@ return {
       end,
     })
 
+    local lspconfig = require 'lspconfig'
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
+
     if catUtils.isNixCats then
       for server, config in pairs(opts.servers) do
-        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
         lspconfig[server].setup(config)
       end
     else
@@ -156,7 +162,6 @@ return {
         handlers = {
           function(server)
             local config = opts.servers[server] or {}
-            local capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
             config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
             lspconfig[server].setup(config)
           end,
