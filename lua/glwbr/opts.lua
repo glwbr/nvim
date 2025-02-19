@@ -11,8 +11,10 @@ vim.cmd [[let &t_Cs = "\e[4:3m"]]
 vim.cmd [[let &t_Ce = "\e[4:0m"]]
 
 -- Netrw file explorer settings
-vim.g.netrw_liststyle = 3                     -- Tree style listing
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 0
 vim.g.netrw_sort_by = 'name'                  -- Sort files by name
+vim.g.netrw_winsize = 25
 
 local opt = vim.opt
 
