@@ -1,22 +1,15 @@
-vim.diagnostic.config {
-  virtual_text = false,                       -- Disable inline diagnostic messages
-  signs = true,                               -- Show diagnostic signs in sign column
-  underline = true,                           -- Underline diagnostic locations
-  update_in_insert = false,                   -- Don't update diagnostics in insert mode
-  severity_sort = true,                       -- Sort diagnostics by severity
-}
+local g = vim.g
+local opt = vim.opt
 
 -- Enable undercurl support in terminal
 vim.cmd [[let &t_Cs = "\e[4:3m"]]
 vim.cmd [[let &t_Ce = "\e[4:0m"]]
 
 -- Netrw file explorer settings
-vim.g.netrw_banner = 0
-vim.g.netrw_browse_split = 0
-vim.g.netrw_sort_by = 'name'                  -- Sort files by name
-vim.g.netrw_winsize = 25
-
-local opt = vim.opt
+g.netrw_banner = 0                            -- Disable banner
+g.netrw_browse_split = 0                      -- Disable the split pane
+g.netrw_sort_by = 'name'                      -- Sort files by name
+g.netrw_winsize = 25
 
 -- Line display and numbering
 opt.cursorline = true                         -- Highlight current line
