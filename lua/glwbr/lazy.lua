@@ -9,7 +9,17 @@ local function getlockfilepath()
   end
 end
 
-local lazyOptions = { lockfile = getlockfilepath() }
+local lazyOptions = {
+  lockfile = getlockfilepath(),
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'tohtml',
+        'tutor',
+      },
+    },
+  },
+}
 
 lazyUtils.setup(nixCats.pawsible { 'allPlugins', 'start', 'lazy.nvim' }, {
   { import = 'plugins' },
