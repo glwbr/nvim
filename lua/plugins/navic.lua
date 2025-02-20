@@ -1,4 +1,4 @@
-local extensions = require 'extensions.nvim-navic'
+local extensions = require 'extensions.navic'
 
 return {
   'SmiteshP/nvim-navic',
