@@ -130,12 +130,20 @@ return {
     })
 
     local lspconfig = require 'lspconfig'
+
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
+
+    local on_attach = function(client, bufnr)
+      if client.server_capabilities.documentSymbolProvider then
+        require('nvim-navic').attach(client, bufnr)
+      end
+    end
 
     if catUtils.isNixCats then
       for server, config in pairs(opts.servers) do
         config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+        config.on_attach = on_attach
         lspconfig[server].setup(config)
       end
     else
@@ -152,6 +160,7 @@ return {
           function(server)
             local config = opts.servers[server] or {}
             config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+            config.on_attach = on_attach
             lspconfig[server].setup(config)
           end,
         },
