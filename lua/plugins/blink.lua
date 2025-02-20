@@ -35,8 +35,8 @@ return {
       },
     },
     keymap = { preset = 'default' },
+    cmdline = { enabled = false },
     sources = {
-      cmdline = {},
       default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
   },
