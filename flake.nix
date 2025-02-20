@@ -4,13 +4,18 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
+
+    incline-nvim = {
+      url = "github:b0o/incline.nvim";
+      flake = false;
+    };
   };
 
   outputs =
     {
-      self,
       nixpkgs,
       nixCats,
+      incline-nvim,
       ...
     }@inputs:
     let
@@ -18,7 +23,18 @@
       luaPath = "${./.}";
       forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
       extra_pkg_config.allowUnfree = true;
-      dependencyOverlays = [ (utils.standardPluginOverlay inputs) ];
+      # dependencyOverlays = [ (utils.standardPluginOverlay inputs) ];
+      dependencyOverlays = [
+        (utils.standardPluginOverlay inputs)
+        (final: prev: {
+          vimPlugins = prev.vimPlugins // {
+            incline-nvim = prev.vimUtils.buildVimPlugin {
+              name = "incline.nvim";
+              src = incline-nvim;
+            };
+          };
+        })
+      ];
 
       categoryDefinitions =
         { pkgs, ... }:
