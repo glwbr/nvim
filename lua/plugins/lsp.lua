@@ -5,20 +5,9 @@ local map = utils.map
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    {
-      'williamboman/mason.nvim',
-      enabled = catUtils.ifNotNix(true),
-      config = true,
-    },
-    {
-      'williamboman/mason-lspconfig.nvim',
-      enabled = catUtils.ifNotNix(true),
-    },
-    {
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-      enabled = catUtils.ifNotNix(true),
-    },
-    { 'j-hui/fidget.nvim', opts = {} },
+    { 'williamboman/mason.nvim', enabled = catUtils.ifNotNix(true), opts = {} },
+    { 'williamboman/mason-lspconfig.nvim', enabled = catUtils.ifNotNix(true) },
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim', enabled = catUtils.ifNotNix(true) },
     {
       'folke/lazydev.nvim',
       ft = 'lua',
