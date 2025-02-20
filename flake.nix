@@ -101,6 +101,11 @@
               blink-cmp
               conform-nvim
               fidget-nvim
+              {
+                plugin = incline-nvim;
+                name = "incline";
+              }
+              nvim-navic
               gitsigns-nvim
               nvim-lint
               todo-comments-nvim
