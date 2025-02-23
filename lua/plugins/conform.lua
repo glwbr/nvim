@@ -5,6 +5,7 @@ return {
   lazy = false,
   opts = {
     notify_on_error = false,
+    log_level = vim.log.levels.DEBUG,
     default_format_opts = {
       timeout_ms = 1000,
       async = false,
@@ -17,15 +18,21 @@ return {
         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       }
     end,
+    formatters = {
+      prettier = {
+        require_cwd = true,
+      },
+    },
     formatters_by_ft = {
+      ['_'] = { 'trim_whitespace' },
       lua = { 'stylua' },
       nix = { 'nixfmt' },
-      json = { 'prettierd' },
-      javascript = { 'prettierd' },
-      javascriptreact = { 'prettierd' },
-      typescript = { 'prettierd' },
-      typescriptreact = { 'prettierd' },
-      ['_'] = { 'trim_whitespace' },
+      json = { 'jq' },
+      jsonc = { 'jq' },
+      javascript = { 'prettier' },
+      javascriptreact = { 'prettier' },
+      typescript = { 'prettier' },
+      typescriptreact = { 'prettier' },
       markdown = function(bufnr)
         return { utils.first(bufnr, 'prettierd', 'prettier'), 'injected' }
       end,
