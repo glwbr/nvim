@@ -50,6 +50,7 @@
               universal-ctags
               ripgrep
               fd
+              jq
               wl-clipboard
             ];
             languages = {
@@ -71,7 +72,7 @@
                 markdown = [ markdownlint-cli ];
                 javascript = [
                   eslint_d
-                  prettierd
+                  nodePackages.prettier
                   typescript-language-server
                 ];
                 json = with nodePackages; [ jsonlint ];
@@ -118,9 +119,15 @@
 
             ui = [
               kanagawa-nvim
-              catppuccin-nvim
+              {
+                plugin = catppuccin-nvim;
+                name = "catppuccin";
+              }
               nvim-web-devicons
-              rose-pine
+              {
+                plugin = rose-pine;
+                name = "rose-pine";
+              }
             ];
           };
 
