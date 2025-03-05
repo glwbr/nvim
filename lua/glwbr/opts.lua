@@ -1,81 +1,153 @@
+-- Global Variables and Netrw Settings
 local g = vim.g
-local opt = vim.opt
 
--- Enable undercurl support in terminal
-vim.cmd [[let &t_Cs = "\e[4:3m"]]
-vim.cmd [[let &t_Ce = "\e[4:0m"]]
+-- Disable Netrw file explorer banner
+g.netrw_banner = 0
 
--- Netrw file explorer settings
-g.netrw_banner = 0                            -- Disable banner
-g.netrw_browse_split = 0                      -- Disable the split pane
-g.netrw_sort_by = 'name'                      -- Sort files by name
+-- Disable split pane
+g.netrw_browse_split = 0
+
+-- Sort files by name
+g.netrw_sort_by = 'name'
+
+-- Set Netrw window size
 g.netrw_winsize = 25
 
--- Line display and numbering
-opt.cursorline = true                         -- Highlight current line
-opt.number = true                             -- Show line numbers
-opt.relativenumber = true                     -- Show relative line numbers
-opt.colorcolumn = '120'                       -- Show column marker
-opt.wrap = false                              -- Disable line wrapping
+-- Options Shortcut
+local opt = vim.opt
 
--- Status and command line
-opt.cmdheight = 0                             -- Minimize command line height
-opt.laststatus = 3                            -- Global status line
-opt.showmode = false                          -- Hide mode indicator
-opt.signcolumn = 'yes'                        -- Always show sign column
+-- Enable true color support
+opt.termguicolors = true
 
--- Colors and visual indicators
-opt.termguicolors = true                      -- Enable true color support
-opt.list = true                               -- Show invisible characters
+-- Highlight current line
+opt.cursorline = false
+
+-- Show line numbers
+opt.number = true
+
+-- Show relative line numbers
+opt.relativenumber = true
+
+-- Show column marker
+opt.colorcolumn = '120'
+
+-- Disable line wrapping
+opt.wrap = false
+
+-- Show invisible characters
+opt.list = true
+
+-- Define invisible characters
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-opt.smoothscroll = true                       -- Smooth scrolling
 
--- Scroll and viewport
-opt.scrolloff = 8                             -- Keep lines visible above/below cursor
-opt.sidescrolloff = 8                         -- Keep columns visible left/right
-opt.winminwidth = 5                           -- Minimum window width
-opt.foldlevel = 99                            -- Start with all folds open
+-- Enable smooth scrolling
+opt.smoothscroll = true
 
--- Popup and completion
-opt.pumblend = 10                             -- Popup menu transparency
-opt.pumheight = 10                            -- Maximum popup menu height
+-- Minimize command line height
+opt.cmdheight = 0
+
+-- Global status line
+opt.laststatus = 0
+
+-- Hide mode indicator
+opt.showmode = false
+
+-- Always show sign column
+opt.signcolumn = 'yes'
+
+-- Keep lines visible above/below cursor
+opt.scrolloff = 8
+
+-- Keep columns visible left/right
+opt.sidescrolloff = 8
+
+-- Minimum window width
+opt.winminwidth = 5
+
+-- Start with all folds open
+opt.foldlevel = 99
+
+-- Popup menu transparency
+opt.pumblend = 10
+
+-- Maximum popup menu height
+opt.pumheight = 10
+
+-- Completion menu options
 opt.completeopt = 'menu,menuone,noselect'
 
-opt.hlsearch = true                           -- Highlight search results
-opt.ignorecase = true                         -- Case-insensitive search
-opt.smartcase = true                          -- Case-sensitive if uppercase present
-opt.grepformat = '%f:%l:%c:%m'                -- Grep output format
-opt.grepprg = 'rg --vimgrep'                  -- Use ripgrep for searching
+-- Highlight search results
+opt.hlsearch = true
 
--- File management
-opt.backup = false                            -- Disable backup files
-opt.swapfile = false                          -- Disable swap files
-opt.undofile = true                           -- Enable persistent undo
-opt.undolevels = 10000                        -- Maximum number of changes to remember
+-- Case-insensitive search
+opt.ignorecase = true
 
--- Encoding
-opt.encoding = 'utf-8'                        -- Internal encoding
-opt.fileencoding = 'utf-8'                    -- File encoding
+-- Case-sensitive if uppercase present
+opt.smartcase = true
 
-opt.tabstop = 4                               -- Spaces per tab
-opt.shiftwidth = 4                            -- Spaces per indent
-opt.softtabstop = 4                           -- Spaces per tab when editing
-opt.expandtab = true                          -- Use spaces instead of tabs
+-- Grep output format
+opt.grepformat = '%f:%l:%c:%m'
 
-opt.splitright = true                         -- Open vertical splits to the right
-opt.splitbelow = true                         -- Open horizontal splits below
-opt.splitkeep = 'screen'                      -- Maintain split screen position
+-- Use ripgrep for searching
+opt.grepprg = 'rg --vimgrep'
 
-opt.timeoutlen = 300                          -- Time to wait for mapped sequence
-opt.updatetime = 200                          -- Faster completion
+-- Disable backup files
+opt.backup = false
 
+-- Disable swap files
+opt.swapfile = false
+
+-- Enable persistent undo
+opt.undofile = true
+
+-- Maximum number of changes to remember
+opt.undolevels = 10000
+
+-- Internal encoding
+opt.encoding = 'utf-8'
+
+-- File encoding
+opt.fileencoding = 'utf-8'
+
+-- Spaces per tab
+opt.tabstop = 4
+
+-- Spaces per indent
+opt.shiftwidth = 4
+
+-- Spaces per tab when editing
+opt.softtabstop = 4
+
+-- Use spaces instead of tabs
+opt.expandtab = true
+
+-- Open vertical splits to the right
+opt.splitright = true
+
+-- Open horizontal splits below
+opt.splitbelow = true
+
+-- Maintain split screen position
+opt.splitkeep = 'screen'
+
+-- Time to wait for mapped sequence
+opt.timeoutlen = 300
+
+-- Faster completion
+opt.updatetime = 200
+
+-- Session options
 opt.sessionoptions = {
-  'buffers',                                  -- Save buffer list
-  'curdir',                                   -- Save current directory
-  'tabpages',                                 -- Save tab pages
-  'winsize',                                  -- Save window sizes
-  'help',                                     -- Save help windows
-  'globals',                                  -- Save global variables
-  'skiprtp',                                  -- Don't save runtime path
-  'folds'                                     -- Save folds
+  'buffers', -- Save buffer list
+  'curdir', -- Save current directory
+  'tabpages', -- Save tab pages
+  'winsize', -- Save window sizes
+  'help', -- Save help windows
+  'globals', -- Save global variables
+  'skiprtp', -- Don't save runtime path
+  'folds', -- Save folds
 }
+
+-- Terminal Undercurl Support
+vim.cmd [[let &t_Cs = "\e[4:3m"]]
+vim.cmd [[let &t_Ce = "\e[4:0m"]]
