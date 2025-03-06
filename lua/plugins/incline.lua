@@ -1,43 +1,45 @@
 return {
   'b0o/incline.nvim',
   name = 'incline',
-  event = 'VeryLazy',
-  opts = function()
-    local helpers = require 'incline.helpers'
-    local navic = require 'nvim-navic'
-    local devicons = require 'nvim-web-devicons'
-
+  event = 'BufReadPre',
+  config = function()
     require('incline').setup {
-      window = { padding = 0, margin = { horizontal = 0, vertical = 0 } },
-
+      highlight = {
+        groups = {
+          InclineNormal = { default = true, group = 'lualine_a_normal' },
+          InclineNormalNC = { default = true, group = 'Comment' },
+        },
+      },
+      window = {
+        margin = { horizontal = 0, vertical = 0 },
+        placement = { horizontal = 'right', vertical = 'top' },
+        overlap = {
+          tabline = false,
+          winbar = true,
+          borders = true,
+          statusline = true,
+        },
+        padding = 0,
+      },
       render = function(props)
         local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
+
         if filename == '' then
           filename = '[No Name]'
         end
-        local ft_icon, ft_color = devicons.get_icon_color(filename)
+
         local modified = vim.bo[props.buf].modified
-        local res = {
-          ft_icon and { ' ', ft_icon, ' ', guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or '',
-          ' ',
-          { filename, gui = modified and 'bold,italic' or 'bold' },
-          guibg = '#232136',
+
+        local icon, color = require('nvim-web-devicons').get_icon_color(filename)
+
+        return {
+          { icon, guifg = color },
+          { icon and ' ' or '' },
+          { filename, gui = modified and 'italic' or 'bold' },
+          { vim.bo[props.buf].modified and ' ' or '', guifg = '#d19a66' }, -- •
         }
-        if props.focused then
-          for _, item in ipairs(navic.get_data(props.buf) or {}) do
-            table.insert(res, {
-              { ' > ', group = 'NavicSeparator' },
-              { item.icon, group = 'NavicIcons' .. item.type },
-              { item.name, group = 'NavicText' },
-            })
-          end
-        end
-        table.insert(res, ' ')
-        return res
       end,
     }
-  end,
-  config = function(_, opts)
-    require('incline').setup(opts)
+    -- user represents the name
   end,
 }
