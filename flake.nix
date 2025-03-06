@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
-
     incline-nvim = {
       url = "github:b0o/incline.nvim";
       flake = false;
@@ -93,9 +92,6 @@
                 plugin = harpoon2;
                 name = "harpoon";
               }
-              telescope-fzf-native-nvim
-              telescope-nvim
-              telescope-ui-select-nvim
             ];
 
             qualityOfLife = [
@@ -107,6 +103,7 @@
                 name = "incline";
               }
               nvim-navic
+              snacks-nvim
               gitsigns-nvim
               nvim-lint
               todo-comments-nvim
