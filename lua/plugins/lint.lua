@@ -5,10 +5,8 @@ return {
     local lint = require 'lint'
 
     lint.linters_by_ft = {
-      typescript = { 'eslint_d' },
-      typescriptreact = { 'eslint_d' },
-      javascript = { 'eslint_d' },
-      javascriptreact = { 'eslint_d' },
+      go = { 'golangcilint' },
+      dockerfile = { 'dockerfile' },
     }
 
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePre', 'InsertLeave', 'TextChanged' }, {
