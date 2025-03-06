@@ -9,38 +9,27 @@ return {
   config = function()
     local harpoon = require 'harpoon'
 
-    harpoon:setup {}
+    harpoon:setup {
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 4,
+      },
+      settings = {
+        save_on_toggle = true,
+      },
+    }
+
+    for i = 1, 5 do
+      vim.keymap.set('n', '<C-' .. i .. '>', function()
+        require('harpoon'):list():select(i)
+      end, { desc = 'Goto Harpoon File ' .. i })
+    end
 
     map('n', '<leader>a', function()
       harpoon:list():add()
-    end)
+    end, { desc = 'Add File to Harpoon List' })
 
     map('n', '<C-e>', function()
-      extensions.toggle_telescope(harpoon:list())
-    end, { desc = 'Harpoon Quick Menu' })
-
-    map('n', '<C-1>', function()
-      harpoon:list():select(1)
-    end, { desc = 'Goto Harpoon File 1' })
-
-    map('n', '<C-2>', function()
-      harpoon:list():select(2)
-    end, { desc = 'Goto Harpoon File 2' })
-
-    map('n', '<C-3>', function()
-      harpoon:list():select(3)
-    end, { desc = 'Goto Harpoon File 3' })
-
-    map('n', '<C-4>', function()
-      harpoon:list():select(4)
-    end, { desc = 'Goto Harpoon File 4' })
-
-    map('n', '<C-S-P>', function()
-      harpoon:list():prev()
-    end)
-
-    map('n', '<C-S-N>', function()
-      harpoon:list():next()
-    end)
+      extensions.toggle_picker(harpoon:list())
+    end, { desc = 'Open Harpoon Quick Menu' })
   end,
 }

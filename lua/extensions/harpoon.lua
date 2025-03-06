@@ -1,41 +1,42 @@
 local M = {}
 
-M.toggle_telescope = function(harpoon_files)
-  local telescope = require 'telescope.config'
-  local finders = require 'telescope.finders'
-
-  local finder = function()
-    local paths = {}
-
+M.toggle_picker = function(harpoon_files)
+  local function generate_items()
+    local items = {}
     for _, item in ipairs(harpoon_files.items) do
-      table.insert(paths, item.value)
+      table.insert(items, {
+        text = item.value,
+        file = item.value,
+      })
     end
-
-    return finders.new_table { results = paths }
+    return items
   end
 
-  require('telescope.pickers')
-    .new({}, {
-      prompt_title = 'Harpoon',
-      finder = finder(),
-      sorter = telescope.values.generic_sorter {},
-      layout_config = {
-        height = 0.4,
-        width = 0.5,
+  return Snacks.picker {
+    finder = generate_items,
+    title = 'Harpoon',
+    layout = { preset = 'vscode' },
+    win = {
+      input = {
+        keys = {
+          ['<C-x>'] = { 'delete', mode = { 'i' } },
+          ['<C-e>'] = { 'close', mode = { 'i', 'v' } },
+          ['dd'] = { 'delete', mode = { 'n', 'v' } },
+        },
       },
-      attach_mappings = function(prompt_bufnr, map)
-        map('n', 'dd', function()
-          local state = require 'telescope.actions.state'
-          local selected_entry = state.get_selected_entry()
-          local current_picker = state.get_current_picker(prompt_bufnr)
-
-          table.remove(harpoon_files.items, selected_entry.index)
-          current_picker:refresh(finder())
-        end)
-        return true
+    },
+    actions = {
+      delete = function(picker, item)
+        if item.idx then
+          table.remove(harpoon_files.items, item.idx)
+          picker:find { refresh = true }
+        end
       end,
-    })
-    :find()
+      close = function(picker)
+        picker:close()
+      end,
+    },
+  }
 end
 
 return M
