@@ -45,7 +45,7 @@ opt.smoothscroll = true
 opt.cmdheight = 0
 
 -- Global status line
-opt.laststatus = 0
+opt.laststatus = 3
 
 -- Hide mode indicator
 opt.showmode = false
