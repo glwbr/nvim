@@ -21,8 +21,7 @@
       inherit (nixCats) utils;
       luaPath = "${./.}";
       forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
-      extra_pkg_config.allowUnfree = true;
-      # dependencyOverlays = [ (utils.standardPluginOverlay inputs) ];
+      # extra_pkg_config.allowUnfree = true;
       dependencyOverlays = [
         (utils.standardPluginOverlay inputs)
         (final: prev: {
@@ -55,6 +54,10 @@
             languages = {
               go = {
                 debug = [ delve ];
+                lint = [ golangci-lint ];
+              };
+              docker = {
+                lint = [ hadolint ];
               };
               lua = [
                 lua-language-server
@@ -66,21 +69,20 @@
                 nixd
                 nixfmt-rfc-style
               ];
-              hypr = [ hyprls ];
-              web = {
-                markdown = [ markdownlint-cli ];
-                javascript = [
-                  eslint_d
-                  nodePackages.prettier
-                  typescript-language-server
-                ];
-                json = with nodePackages; [ jsonlint ];
-              };
+              web = [
+                vtsls
+                markdownlint-cli
+                prettierd
+                nodePackages.jsonlint
+                vscode-langservers-extracted
+              ];
             };
           };
 
           startupPlugins = with pkgs.vimPlugins; {
             core = [
+              blink-cmp
+              conform-nvim
               lazy-nvim
               nvim-lspconfig
               nvim-treesitter.withAllGrammars
@@ -95,8 +97,6 @@
             ];
 
             qualityOfLife = [
-              blink-cmp
-              conform-nvim
               fidget-nvim
               {
                 plugin = incline-nvim;
@@ -115,7 +115,6 @@
             ];
 
             ui = [
-              kanagawa-nvim
               {
                 plugin = catppuccin-nvim;
                 name = "catppuccin";
