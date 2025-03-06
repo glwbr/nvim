@@ -1,5 +1,6 @@
--- Global Variables and Netrw Settings
+-- Shortcuts
 local g = vim.g
+local opt = vim.opt
 
 -- Disable Netrw file explorer banner
 g.netrw_banner = 0
@@ -12,9 +13,6 @@ g.netrw_sort_by = 'name'
 
 -- Set Netrw window size
 g.netrw_winsize = 25
-
--- Options Shortcut
-local opt = vim.opt
 
 -- Enable true color support
 opt.termguicolors = true
