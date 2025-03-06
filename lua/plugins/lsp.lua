@@ -100,30 +100,28 @@ return {
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
+
         if not client then
           return
         end
 
+        map('n', '<leader>ds', Snacks.picker.lsp_symbols, { desc = '[L]sp [D]ocument Symbols' })
+        map('n', '<leader>ws', Snacks.picker.lsp_workspace_symbols, { desc = '[L]sp [W]orkspace Symbols' })
+
+        map('n', 'ca', vim.lsp.buf.code_action, { desc = 'Code Actions' })
+        map('n', 'gr', Snacks.picker.lsp_references, { desc = 'Goto References' })
+        map('n', 'gd', Snacks.picker.lsp_definitions, { desc = 'Goto Definition' })
+        map('n', 'gt', Snacks.picker.lsp_type_definitions, { desc = 'Goto Type Definition' })
+        map('n', 'gi', Snacks.picker.lsp_implementations, { desc = 'Goto Implementation' })
+
         map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
-        map('n', 'gd', require('telescope.builtin').lsp_definitions, { desc = '[G]oto [D]efinition' })
-        map('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]eclaration' })
-        map('n', 'gi', require('telescope.builtin').lsp_implementations, { desc = '[G]oto [I]mplementation' })
-        map('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences' })
-        map('n', 'gt', require('telescope.builtin').lsp_type_definitions, { desc = '[G]oto [T]ype' })
-        map('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
-        map(
-          'n',
-          '<leader>ws',
-          require('telescope.builtin').lsp_dynamic_workspace_symbols,
-          { desc = '[W]orkspace [S]ymbols' }
-        )
-        map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
-        map('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
+        map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Goto Declaration' })
+        map('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[L]sp [R]ename' })
 
         if client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) and vim.lsp.inlay_hint then
           map('n', '<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, { desc = '[T]oggle Inlay [H]ints' })
+          end, { desc = '[L]sp [T]oggle [H]ints' })
         end
 
         if client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
