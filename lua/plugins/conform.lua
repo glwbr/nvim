@@ -7,7 +7,7 @@ return {
     notify_on_error = false,
     log_level = vim.log.levels.DEBUG,
     default_format_opts = {
-      timeout_ms = 1000,
+      timeout_ms = 500,
       async = false,
       quiet = false,
       lsp_format = 'fallback',
@@ -19,20 +19,19 @@ return {
       }
     end,
     formatters = {
-      prettier = {
-        require_cwd = true,
-      },
+      ['biome-check'] = { append_args = { '--unsafe' } },
+      prettierd = { require_cwd = true },
     },
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace' },
       lua = { 'stylua' },
       nix = { 'nixfmt' },
-      json = { 'jq' },
-      jsonc = { 'jq' },
-      javascript = { 'prettier' },
-      javascriptreact = { 'prettier' },
-      typescript = { 'prettier' },
-      typescriptreact = { 'prettier' },
+      javascript = { 'prettierd' },
+      typescript = { 'prettierd' },
+      javascriptreact = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
+      json = { 'prettierd' },
+      jsonc = { 'prettierd' },
       markdown = function(bufnr)
         return { utils.first(bufnr, 'prettierd', 'prettier'), 'injected' }
       end,
