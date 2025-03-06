@@ -1,6 +1,6 @@
 local utils = require 'utils'
-local catUtils = require 'utils.cats'
 local map = utils.map
+local catUtils = require 'utils.cats'
 
 return {
   'neovim/nvim-lspconfig',
@@ -23,7 +23,12 @@ return {
   opts = function()
     return {
       servers = {
+        eslint = {},
+        cssls = {},
         dockerls = {},
+        gopls = {},
+        html = {},
+        jsonls = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -53,13 +58,30 @@ return {
             },
           },
         },
-        gopls = {},
-        ts_ls = {},
         nixd = {},
+        vtsls = {
+          settings = {
+            complete_function_calls = true,
+            vtsls = {
+              enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                maxInlayHintLength = 30,
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = 'always' },
+              suggest = { completeFunctionCalls = true },
+            },
+          },
+        },
       },
 
       vim.diagnostic.config {
-        virtual_text = true,
+        virtual_text = false,
         underline = true,
         severity_sort = true,
         float = {
@@ -134,16 +156,9 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
-    local on_attach = function(client, bufnr)
-      if client.server_capabilities.documentSymbolProvider then
-        require('nvim-navic').attach(client, bufnr)
-      end
-    end
-
     if catUtils.isNixCats then
       for server, config in pairs(opts.servers) do
         config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
-        config.on_attach = on_attach
         lspconfig[server].setup(config)
       end
     else
@@ -160,7 +175,6 @@ return {
           function(server)
             local config = opts.servers[server] or {}
             config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
-            config.on_attach = on_attach
             lspconfig[server].setup(config)
           end,
         },
