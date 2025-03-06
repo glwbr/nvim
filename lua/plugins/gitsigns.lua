@@ -11,9 +11,9 @@ return {
     current_line_blame_opts = {
       delay = 500,
     },
-    current_line_blame_formatter = '<author> • <author_time:%R> <summary>',
+    current_line_blame_formatter = '<author> • <author_time:%R> - <summary>',
     current_line_blame_formatter_nc = 'Uncommitted changes',
-    numhl = true,
+    numhl = false,
     preview_config = {
       border = 'none',
       style = 'minimal',
@@ -38,7 +38,7 @@ return {
         else
           gs.nav_hunk 'next'
         end
-      end, { desc = 'Jump to next git change' })
+      end, { desc = 'Git Next Hunk' })
 
       map('n', 'gk', function()
         if vim.wo.diff then
@@ -46,17 +46,10 @@ return {
         else
           gs.nav_hunk 'prev'
         end
-      end, { desc = 'Jump to previous git change' })
+      end, { desc = 'Git Previous Hunk' })
 
-      map('n', '<leader>gb', gs.blame_line, { desc = 'Blame line' })
-      map('n', '<leader>gD', gs.diffthis, { desc = 'Diff' })
-      map('n', '<leader>gp', gs.preview_hunk_inline, { desc = 'Preview changes' })
-      map('v', '<leader>gs', function()
-        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-      end, { desc = 'Stage selected hunk' })
-      map('v', '<leader>gu', function()
-        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-      end, { desc = 'Undo staged hunk' })
+      map('n', '<leader>gb', gs.blame_line, { desc = '[G]it [B]lame Line' })
+      map('n', '<leader>gD', gs.diffthis, { desc = '[G]it [D]iff This' })
     end,
   },
 }
