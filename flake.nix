@@ -75,6 +75,7 @@
                 markdownlint-cli
                 prettierd
                 nodePackages.jsonlint
+                eslint_d
                 vscode-langservers-extracted
               ];
             };
