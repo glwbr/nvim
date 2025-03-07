@@ -71,6 +71,7 @@
               ];
               web = [
                 vtsls
+                tailwindcss-language-server
                 markdownlint-cli
                 prettierd
                 nodePackages.jsonlint

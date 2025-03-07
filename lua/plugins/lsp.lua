@@ -59,6 +59,32 @@ return {
           },
         },
         nixd = {},
+        tailwindcss = {
+          root_dir = root_pattern(
+            'tailwind.config.js',
+            'tailwind.config.cjs',
+            'tailwind.config.ts',
+            'postcss.config.js',
+            'postcss.config.ts'
+          ),
+          settings = {
+            scss = { validate = false },
+            editor = { quickSuggestions = { strings = true }, autoClosingQuotes = 'always' },
+            tailwindCSS = {
+              experimental = {
+                classRegex = {
+                  [[[\S]*ClassName="([^"]*)]], -- <MyComponent containerClassName="..." />
+                  [[[\S]*ClassName={"([^"}]*)]], -- <MyComponent containerClassName={"..."} />
+                  [[[\S]*ClassName={"([^'}]*)]], -- <MyComponent containerClassName={'...'} />
+                },
+              },
+              includeLanguages = {
+                typescript = 'javascript',
+                typescriptreact = 'javascript',
+              },
+            },
+          },
+        },
         vtsls = {
           settings = {
             complete_function_calls = true,
