@@ -102,7 +102,6 @@
                 plugin = incline-nvim;
                 name = "incline";
               }
-              dropbar-nvim
               snacks-nvim
               gitsigns-nvim
               nvim-lint
