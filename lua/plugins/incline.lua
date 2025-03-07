@@ -11,7 +11,7 @@ return {
         },
       },
       window = {
-        margin = { horizontal = 0, vertical = 0 },
+        margin = { horizontal = 1, vertical = 0 },
         placement = { horizontal = 'right', vertical = 'top' },
         overlap = {
           tabline = false,
