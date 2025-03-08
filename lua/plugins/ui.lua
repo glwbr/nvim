@@ -1,6 +1,3 @@
-local utils = require 'utils'
-local map = utils.map
-
 return {
   {
     'j-hui/fidget.nvim',
