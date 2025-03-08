@@ -3,19 +3,16 @@ local map = utils.map
 
 return {
   'folke/snacks.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
-  opts = {
-    picker = { enabled = true },
-  },
-  config = function(_, opts)
-    require('snacks').setup(opts)
+  config = function()
+    ---@type snacks.Config
+    require('snacks').setup { picker = { enabled = true } }
 
     map('n', '<leader>/', Snacks.picker.grep_buffers, { desc = '[/] Fuzzily search in current buffer' })
     map('n', '<leader>s.', Snacks.picker.recent, { desc = '[S]earch Recent Files ("." for repeat)' })
     map('n', '<leader>ff', Snacks.picker.files, { desc = '[S]earch [F]iles' })
+    map('n', '<leader>rf', Snacks.rename.rename_file, { desc = 'Rename File' })
     map('n', '<leader>sd', Snacks.picker.diagnostics, { desc = '[S]earch [D]iagnostics' })
     map('n', '<leader>sf', Snacks.picker.smart, { desc = '[S]earch [F]iles' })
     map('n', '<leader>sg', Snacks.picker.grep_buffers, { desc = '[S]earch [/] in Open Files' })

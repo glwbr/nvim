@@ -96,6 +96,7 @@
                 plugin = harpoon2;
                 name = "harpoon";
               }
+              oil-nvim
             ];
 
             qualityOfLife = [
