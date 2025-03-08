@@ -120,7 +120,7 @@
                 plugin = catppuccin-nvim;
                 name = "catppuccin";
               }
-              nvim-web-devicons
+              mini-icons
               {
                 plugin = rose-pine;
                 name = "rose-pine";
