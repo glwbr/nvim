@@ -12,6 +12,7 @@ M.toggle_picker = function(harpoon_files)
     return items
   end
 
+  ---@field sources snacks.picker.sources.Config
   return Snacks.picker {
     finder = generate_items,
     title = 'Harpoon',
