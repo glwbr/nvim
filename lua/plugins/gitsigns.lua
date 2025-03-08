@@ -5,22 +5,14 @@ local map = utils.map
 
 return {
   'lewis6991/gitsigns.nvim',
+  event = 'BufReadPost',
   enabled = catUtils.enableForCategory 'qualityOfLife',
   opts = {
     current_line_blame = true,
-    current_line_blame_opts = {
-      delay = 500,
-    },
+    current_line_blame_opts = { delay = 500 },
     current_line_blame_formatter = '<author> • <author_time:%R> - <summary>',
     current_line_blame_formatter_nc = 'Uncommitted changes',
     numhl = false,
-    preview_config = {
-      border = 'none',
-      style = 'minimal',
-      relative = 'cursor',
-      row = 0,
-      col = 1,
-    },
     signs = {
       add = { text = '│' },
       change = { text = '│' },
@@ -48,7 +40,6 @@ return {
         end
       end, { desc = 'Git Previous Hunk' })
 
-      map('n', '<leader>gb', gs.blame_line, { desc = '[G]it [B]lame Line' })
       map('n', '<leader>gD', gs.diffthis, { desc = '[G]it [D]iff This' })
     end,
   },
