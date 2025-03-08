@@ -21,9 +21,21 @@ return {
     },
   },
   opts = function()
+    local root_pattern = require('lspconfig.util').root_pattern
     return {
       servers = {
-        eslint = {},
+        eslint = {
+          settings = {
+            codeActionOnSave = {
+              enable = false,
+              mode = 'all',
+            },
+            format = false,
+            quiet = false,
+            run = 'onSave',
+            validate = 'on',
+          },
+        },
         cssls = {},
         dockerls = {},
         gopls = {},
@@ -109,11 +121,25 @@ return {
       vim.diagnostic.config {
         virtual_text = false,
         underline = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '',
+            [vim.diagnostic.severity.HINT] = '',
+          },
+          numhl = {
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+          },
+        },
         severity_sort = true,
         float = {
           focusable = false,
           style = 'minimal',
-          border = 'none',
+          border = 'rounded',
           source = true,
           header = '',
           prefix = '',
