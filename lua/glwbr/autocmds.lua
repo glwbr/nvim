@@ -94,3 +94,14 @@ autocmd('BufReadPost', {
   end,
   desc = 'Go to last loc when opening a buffer',
 })
+
+vim.api.nvim_create_autocmd('User', {
+  group = augroup 'move_file',
+  pattern = 'OilActionsPost',
+  callback = function(event)
+    if event.data.actions.type == 'move' then
+      Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+    end
+  end,
+  desc = 'Go to last loc when opening a buffer',
+})
