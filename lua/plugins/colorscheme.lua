@@ -2,46 +2,62 @@ local catUtils = require 'utils.cats'
 
 return {
   {
-    'rebelot/kanagawa.nvim',
-    build = catUtils.ifNotNix ':KanagawaCompile',
-    enabled = true,
-    opts = {
-      compile = catUtils.ifNotNix(true),
-      undercurl = true,
-      commentStyle = { italic = true },
-      functionStyle = {},
-      keywordStyle = { italic = false },
-      statementStyle = { bold = true },
-      typeStyle = {},
-      transparent = true,
-      dimInactive = false,
-      terminalColors = true,
-      background = {
-        dark = 'wave',
-        light = 'lotus',
-      },
-    },
-    config = function(_, opts)
-      require('kanagawa').setup(opts)
-      vim.cmd 'colorscheme kanagawa'
-    end,
-  },
-  {
     'rose-pine/neovim',
     name = 'rose-pine',
     enabled = false,
     opts = {
-      variant = 'moon',
+      variant = 'main',
       styles = {
         bold = true,
-        italic = false,
-        transparency = true,
+        italic = true,
+        transparency = false,
       },
     },
     config = function(_, opts)
       require('rose-pine').setup(opts)
-
       vim.cmd 'colorscheme rose-pine'
+    end,
+  },
+  {
+    'catppuccin/nvim',
+    enabled = true,
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup {
+        background = {
+          light = 'latte',
+          dark = 'mocha',
+        },
+        flavour = 'mocha',
+        integrations = {
+          native_lsp = {
+            enabled = true,
+            underlines = {
+              errors = { 'undercurl' },
+              hints = { 'undercurl' },
+              warnings = { 'undercurl' },
+              information = { 'undercurl' },
+            },
+          },
+        },
+        styles = {
+          comments = { 'italic' },
+          conditionals = {},
+          loops = {},
+          functions = {},
+          keywords = {},
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = {},
+          operators = {},
+        },
+        term_colors = true,
+      }
+      vim.cmd 'colorscheme catppuccin'
     end,
   },
 }
