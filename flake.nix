@@ -86,6 +86,10 @@
               blink-cmp
               conform-nvim
               lazy-nvim
+              {
+                plugin = luasnip;
+                name = "LuaSnip";
+              }
               nvim-lspconfig
               nvim-treesitter.withAllGrammars
               plenary-nvim
