@@ -49,6 +49,9 @@ map('n', '<leader>Y', '"+Y', { desc = 'Yank Line to clipboard' })
 map('x', '<leader>p', '"_dP', { desc = 'Paste over selection (no clipboard)' })
 map('n', 'x', '"_x', { desc = 'Delete char (no clipboard)' })
 map('n', 'J', 'mzJ`z', { desc = 'Join Lines' })
+map('n', '+', '<C-a>', { desc = 'Increment numbers', noremap = true })
+map('n', '-', '<C-x>', { desc = 'Decrement numbers', noremap = true })
+map('v', '+', 'g<C-a>', { desc = 'Increment numbers', noremap = true })
 
 -- Utility Keymaps
 map('n', '<leader><leader>', function()
