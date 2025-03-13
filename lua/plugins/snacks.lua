@@ -7,7 +7,10 @@ return {
   lazy = false,
   config = function()
     ---@type snacks.Config
-    require('snacks').setup { picker = { enabled = true } }
+    require('snacks').setup {
+      bigfile = { enabled = true },
+      picker = { enabled = true },
+    }
 
     map('n', '<leader>/', Snacks.picker.grep_buffers, { desc = '[/] Fuzzily search in current buffer' })
     map('n', '<leader>s.', Snacks.picker.recent, { desc = '[S]earch Recent Files ("." for repeat)' })
