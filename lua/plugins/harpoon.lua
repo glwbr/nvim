@@ -19,7 +19,7 @@ return {
     }
 
     for i = 1, 5 do
-      vim.keymap.set('n', '<C-' .. i .. '>', function()
+      map('n', '<leader>' .. i, function()
         require('harpoon'):list():select(i)
       end, { desc = 'Goto Harpoon File ' .. i })
     end
@@ -28,7 +28,7 @@ return {
       harpoon:list():add()
     end, { desc = 'Add File to Harpoon List' })
 
-    map('n', '<C-e>', function()
+    map('n', '<leader>e', function()
       extensions.toggle_picker(harpoon:list())
     end, { desc = 'Open Harpoon Quick Menu' })
   end,
