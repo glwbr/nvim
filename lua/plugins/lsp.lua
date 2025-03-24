@@ -24,18 +24,18 @@ return {
     local root_pattern = require('lspconfig.util').root_pattern
     return {
       servers = {
-        eslint = {
-          settings = {
-            codeActionOnSave = {
-              enable = false,
-              mode = 'all',
-            },
-            format = false,
-            quiet = false,
-            run = 'onSave',
-            validate = 'on',
-          },
-        },
+        -- eslint = {
+        --   settings = {
+        --     codeActionOnSave = {
+        --       enable = false,
+        --       mode = 'all',
+        --     },
+        --     format = false,
+        --     quiet = false,
+        --     run = 'onSave',
+        --     validate = 'on',
+        --   },
+        -- },
         cssls = {},
         dockerls = {},
         gopls = {},
@@ -137,9 +137,9 @@ return {
         },
         severity_sort = true,
         float = {
-          focusable = false,
+          focusable = true,
           style = 'minimal',
-          border = 'rounded',
+          border = 'none',
           source = true,
           header = '',
           prefix = '',
