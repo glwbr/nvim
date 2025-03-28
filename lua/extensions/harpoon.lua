@@ -21,7 +21,7 @@ M.toggle_picker = function(harpoon_files)
       input = {
         keys = {
           ['<C-x>'] = { 'delete', mode = { 'i' } },
-          ['<C-e>'] = { 'close', mode = { 'i', 'v' } },
+          ['<leade>e'] = { 'close', mode = { 'i', 'v' } },
           ['dd'] = { 'delete', mode = { 'n', 'v' } },
         },
       },
