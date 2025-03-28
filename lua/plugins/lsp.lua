@@ -25,6 +25,7 @@ return {
     return {
       servers = {
         -- eslint = {
+        --   cmd = { 'vscode-eslint-language-server', '--stdio', '--max-old-space-size=5120' },
         --   settings = {
         --     codeActionOnSave = {
         --       enable = false,
@@ -113,14 +114,19 @@ return {
             typescript = {
               updateImportsOnFileMove = { enabled = 'always' },
               suggest = { completeFunctionCalls = true },
+              tsserver = {
+                maxTsServerMemory = 5120,
+              },
             },
           },
         },
       },
 
       vim.diagnostic.config {
-        virtual_text = false,
         underline = true,
+        virtual_text = false,
+        severity_sort = true,
+        update_in_insert = false,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = '',
@@ -135,12 +141,11 @@ return {
             [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
           },
         },
-        severity_sort = true,
         float = {
-          focusable = true,
-          style = 'minimal',
-          border = 'none',
           source = true,
+          border = 'rounded',
+          style = 'minimal',
+          focusable = true,
           header = '',
           prefix = '',
         },
