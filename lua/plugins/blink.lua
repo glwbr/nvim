@@ -40,13 +40,11 @@ return {
         update_delay_ms = 50,
         treesitter_highlighting = true,
       },
-      ghost_text = { enabled = true },
+      ghost_text = { enabled = true, show_with_menu = false },
       list = { max_items = 30 },
     },
 
-    sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
-    },
+    sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
 
     fuzzy = { implementation = 'rust' },
   },
