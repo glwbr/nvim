@@ -100,6 +100,7 @@
                 plugin = harpoon2;
                 name = "harpoon";
               }
+              tmux-navigator
               oil-nvim
             ];
 
