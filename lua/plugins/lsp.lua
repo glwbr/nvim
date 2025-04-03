@@ -175,13 +175,13 @@ return {
         map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Goto Declaration' })
         map('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[L]sp [R]ename' })
 
-        if client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) and vim.lsp.inlay_hint then
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) and vim.lsp.inlay_hint then
           map('n', '<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
           end, { desc = '[L]sp [T]oggle [H]ints' })
         end
 
-        if client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
           local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
