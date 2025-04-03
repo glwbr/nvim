@@ -1,12 +1,12 @@
 return {
   'mfussenegger/nvim-lint',
-  event = { 'BufWritePost', 'BufReadPost', 'InsertLeave' },
+  event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local lint = require 'lint'
 
     lint.linters_by_ft = {
       go = { 'golangcilint' },
-      dockerfile = { 'dockerfile' },
+      dockerfile = { 'hadolint' },
       javascript = { 'eslint_d' },
       typescript = { 'eslint_d' },
       javascriptreact = { 'eslint_d' },
