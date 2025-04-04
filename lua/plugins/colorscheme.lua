@@ -3,8 +3,9 @@ local catUtils = require 'utils.cats'
 return {
   {
     'rose-pine/neovim',
+    enabled = false,
     name = 'rose-pine',
-    enabled = true,
+    priority = 1000,
     opts = {
       variant = 'main',
       styles = {
@@ -43,7 +44,7 @@ return {
   },
   {
     'catppuccin/nvim',
-    enabled = false,
+    enabled = true,
     name = 'catppuccin',
     priority = 1000,
     config = function()

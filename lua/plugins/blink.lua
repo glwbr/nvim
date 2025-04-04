@@ -18,6 +18,7 @@ return {
     snippets = { preset = 'luasnip' },
     completion = {
       menu = {
+        border = 'none',
         draw = {
           components = {
             kind_icon = {
@@ -39,8 +40,9 @@ return {
         auto_show_delay_ms = 500,
         update_delay_ms = 50,
         treesitter_highlighting = true,
+        window = { border = 'none' },
       },
-      ghost_text = { enabled = true, show_with_menu = false },
+      ghost_text = { enabled = true, show_with_menu = true },
       list = { max_items = 30 },
     },
 
