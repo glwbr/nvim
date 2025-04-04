@@ -40,7 +40,7 @@
           sharedLibraries = { };
           environmentVariables = { };
           extraLuaPackages = { };
-          extraPython3Packages = { };
+          python3.libraries = { };
           extraWrapperArgs = { };
 
           lspsAndRuntimeDeps = with pkgs; {
@@ -144,9 +144,9 @@
             settings = {
               wrapRc = true;
               aliases = [ "v" ];
-              withNodeJs = false;
-              withRuby = false;
-              withPython3 = false;
+              hosts.node.enable = false;
+              hosts.python3.enable = false;
+              hosts.ruby.enable = false;
             };
 
             categories = {
