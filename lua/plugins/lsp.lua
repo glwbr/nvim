@@ -100,6 +100,7 @@ return {
         },
         vtsls = {
           settings = {
+            separate_diagnostic_server = true,
             complete_function_calls = true,
             vtsls = {
               enableMoveToFileCodeAction = true,
