@@ -133,7 +133,33 @@ usercmd('EslintFix', function()
     return
   end
 
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  local content = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
   local cursor_pos = vim.fn.getpos '.'
-  vim.cmd '%!eslint_d --stdin --fix-to-stdout --stdin-filename %'
-  vim.fn.setpos('.', cursor_pos)
+
+  local function handle_eslint_output(_, data)
+    if not (data and #data > 1) then
+      return
+    end
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, data)
+    vim.fn.setpos('.', cursor_pos)
+  end
+
+  local function handle_eslint_error(_, data)
+    if data and #data > 1 then
+      vim.notify(table.concat(data, '\n'), vim.log.levels.ERROR)
+    end
+  end
+
+  local job_id = vim.fn.jobstart({ 'eslint_d', '--stdin', '--fix-to-stdout', '--stdin-filename', filename }, {
+    stdout_buffered = true,
+    on_stdout = handle_eslint_output,
+    on_stderr = handle_eslint_error,
+  })
+
+  if job_id > 0 then
+    vim.fn.chansend(job_id, table.concat(content, '\n'))
+    vim.fn.chanclose(job_id, 'stdin')
+  end
 end, { desc = 'Fix ESLint issues in current buffer' })
