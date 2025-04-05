@@ -138,7 +138,6 @@ opt.updatetime = 200
 opt.sessionoptions = {
   'buffers', -- Save buffer list
   'curdir', -- Save current directory
-  'tabpages', -- Save tab pages
   'winsize', -- Save window sizes
   'help', -- Save help windows
   'globals', -- Save global variables
@@ -149,3 +148,12 @@ opt.sessionoptions = {
 -- Terminal Undercurl Support
 vim.cmd [[let &t_Cs = "\e[4:3m"]]
 vim.cmd [[let &t_Ce = "\e[4:0m"]]
+
+vim.opt.guicursor = {
+  'n-v-c:block',
+  'i-ci-ve:ver25',
+  'r-cr:hor20',
+  'o:hor50',
+  'a:blinkwait700-blinkoff400-blinkon250',
+  'sm:block-blinkwait175-blinkoff150-blinkon175',
+}
