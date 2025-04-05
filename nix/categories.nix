@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  grammarUtils = import ./grammars.nix;
-in
 {
   sharedLibraries = { };
   environmentVariables = { };
@@ -60,7 +57,7 @@ in
         name = "LuaSnip";
       }
       nvim-lspconfig
-      (nvim-treesitter.withPlugins grammarUtils.treesitterGrammars)
+      nvim-treesitter.withAllGrammars
       plenary-nvim
     ];
 
