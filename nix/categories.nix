@@ -39,12 +39,11 @@ in
         lsp = [
           vtsls
           tailwindcss-language-server
-          vscode-langservers-extracted
+          nodePackages.vscode-langservers-extracted
         ];
         lint = [
-          markdownlint-cli
           nodePackages.jsonlint
-          eslint_d
+          nodePackages.eslint_d
         ];
         formatter = [ prettierd ];
       };
@@ -96,11 +95,12 @@ in
         plugin = catppuccin-nvim;
         name = "catppuccin";
       }
-      mini-icons
       {
         plugin = rose-pine;
         name = "rose-pine";
       }
+
+      mini-icons
     ];
   };
 
