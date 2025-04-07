@@ -13,6 +13,7 @@ return {
       scratch = { enabled = false },
       statuscolumn = { enabled = true },
       picker = {
+        enabled = true,
         layout = function()
           return vim.o.columns >= 120 and 'my_telescope'
             or vim.o.lines >= 25 and 'my_telescope_vertical'
@@ -104,10 +105,8 @@ return {
           },
         },
         win = {
-          input = { keys = { ['<Esc>'] = { 'close', mode = { 'n', 'i' } } } },
           preview = { wo = { foldcolumn = '0', number = false, relativenumber = false, signcolumn = 'no' } },
         },
-        debug = { scores = false },
       },
     }
 
