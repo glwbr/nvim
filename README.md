@@ -21,7 +21,7 @@ The goal is to maintain a minimal yet fully functional setup that prioritizes si
 - Built using nixCats and Nix flakes
 - Pure Lua configuration
 - Simple dependency management
-- Maintains compatibility with standard Neovim configurations
+- Compatibility with standard Neovim configurations with lazy.nvim
 
 ## :rocket: Quick Start
 
