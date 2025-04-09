@@ -24,6 +24,7 @@ return {
     },
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace' },
+      go = { 'goimports', 'gofmt' },
       lua = { 'stylua' },
       nix = { 'nixfmt' },
       javascript = { 'prettierd' },
