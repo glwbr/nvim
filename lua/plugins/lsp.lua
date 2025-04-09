@@ -39,7 +39,10 @@ return {
         -- },
         cssls = {},
         dockerls = {},
-        gopls = {},
+        gopls = {
+          completeUimported = true,
+          usePlaceholders = true,
+        },
         html = {},
         jsonls = {},
         lua_ls = {
