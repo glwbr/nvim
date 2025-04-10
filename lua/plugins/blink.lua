@@ -18,8 +18,10 @@ return {
     snippets = { preset = 'luasnip' },
     completion = {
       menu = {
-        border = 'none',
+        border = 'rounded',
         draw = {
+          padding = 0,
+          columns = { { 'kind_icon', gap = 1 }, { gap = 1, 'label' }, { 'kind', gap = 1 } },
           components = {
             kind_icon = {
               ellipsis = false,
@@ -37,10 +39,10 @@ return {
       },
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 500,
         update_delay_ms = 50,
+        auto_show_delay_ms = 500,
         treesitter_highlighting = true,
-        window = { border = 'none' },
+        window = { border = 'rounded' },
       },
       ghost_text = { enabled = true, show_with_menu = true },
       list = { max_items = 30 },
@@ -48,7 +50,7 @@ return {
 
     sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
 
-    fuzzy = { implementation = 'rust' },
+    fuzzy = { implementation = 'prefer_rust' },
   },
   opts_extend = { 'sources.default' },
 }
