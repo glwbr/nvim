@@ -18,7 +18,7 @@ g.netrw_winsize = 25
 opt.termguicolors = true
 
 -- Highlight current line
-opt.cursorline = false
+opt.cursorline = true
 
 -- Show line numbers
 opt.number = true
