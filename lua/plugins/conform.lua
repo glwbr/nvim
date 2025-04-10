@@ -2,7 +2,8 @@ local utils = require 'utils'
 
 return {
   'stevearc/conform.nvim',
-  lazy = false,
+  event = { 'BufWritePre' },
+  cmd = { 'ConformInfo' },
   opts = {
     notify_on_error = false,
     log_level = vim.log.levels.DEBUG,
@@ -14,9 +15,10 @@ return {
     },
     format_on_save = function(bufnr)
       local disable_filetypes = { c = true, cpp = true }
-      return {
-        lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-      }
+      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        return
+      end
+      return { lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype] }
     end,
     formatters = {
       ['biome-check'] = { append_args = { '--unsafe' } },
