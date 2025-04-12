@@ -19,7 +19,15 @@ return {
         },
       },
       win = {
-        preview = { wo = { foldcolumn = '0', number = false, relativenumber = false, signcolumn = 'no' } },
+        preview = {
+          wo = {
+            foldcolumn = '0',
+            number = false,
+            relativenumber = false,
+            fillchars = 'eob: ',
+            signcolumn = 'no',
+          },
+        },
       },
     },
   },
