@@ -4,9 +4,10 @@
   (utils.standardPluginOverlay inputs)
   (final: prev: {
     vimPlugins = prev.vimPlugins // {
-      incline-nvim = prev.vimUtils.buildVimPlugin {
-        name = "incline.nvim";
-        src = inputs.incline-nvim;
+      kanagawa-paper-nvim = prev.vimUtils.buildVimPlugin {
+        nvimSkipModules = [ "wezterm.theme_switcher" ];
+        name = "kanagawa-paper.nvim";
+        src = inputs.kanagawa-paper-nvim;
       };
     };
   })

@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
+    kanagawa-paper-nvim = {
+      url = "github:thesimonho/kanagawa-paper.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -20,6 +24,7 @@
       # Import modularized components
       categoryDefinitions = import ./nix/categories.nix;
       packageDefinitions = import ./nix/packages.nix;
+      dependencyOverlays = import ./nix/overlays.nix { inherit utils inputs; };
       defaultPackageName = "nvim";
     in
     forEachSystem (
@@ -27,8 +32,7 @@
       let
         inherit (utils) baseBuilder;
         nixCatsBuilder = baseBuilder luaPath {
-          inherit nixpkgs;
-          inherit system;
+          inherit nixpkgs dependencyOverlays system;
         } categoryDefinitions packageDefinitions;
         defaultPackage = nixCatsBuilder defaultPackageName;
         pkgs = import nixpkgs { inherit system; };
@@ -51,6 +55,7 @@
         inherit
           categoryDefinitions
           defaultPackageName
+          dependencyOverlays
           luaPath
           packageDefinitions
           ;
@@ -60,6 +65,7 @@
         inherit
           categoryDefinitions
           defaultPackageName
+          dependencyOverlays
           luaPath
           packageDefinitions
           ;
