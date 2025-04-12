@@ -93,8 +93,12 @@
         name = "catppuccin";
       }
       {
-        plugin = rose-pine;
-        name = "rose-pine";
+        plugin = kanagawa-paper-nvim;
+        name = "kanagawa";
+      }
+      {
+        plugin = gruvbox-material;
+        name = "gruvbox";
       }
 
       mini-icons
