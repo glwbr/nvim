@@ -16,6 +16,7 @@
     ];
     languages = {
       go = {
+        lsp = [ gopls ];
         debug = [ delve ];
         lint = [ golangci-lint ];
       };
