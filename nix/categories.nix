@@ -95,13 +95,12 @@
       }
       {
         plugin = kanagawa-paper-nvim;
-        name = "kanagawa";
+        name = "kanagawa-paper";
       }
       {
-        plugin = gruvbox-material;
-        name = "gruvbox";
+        plugin = rose-pine;
+        name = "rose-pine";
       }
-
       mini-icons
     ];
   };
