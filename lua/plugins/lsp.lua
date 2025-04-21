@@ -24,19 +24,6 @@ return {
     local root_pattern = require('lspconfig.util').root_pattern
     return {
       servers = {
-        -- eslint = {
-        --   cmd = { 'vscode-eslint-language-server', '--stdio', '--max-old-space-size=5120' },
-        --   settings = {
-        --     codeActionOnSave = {
-        --       enable = false,
-        --       mode = 'all',
-        --     },
-        --     format = false,
-        --     quiet = false,
-        --     run = 'onSave',
-        --     validate = 'on',
-        --   },
-        -- },
         cssls = {},
         dockerls = {},
         gopls = {
