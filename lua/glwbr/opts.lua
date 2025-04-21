@@ -36,7 +36,7 @@ opt.wrap = false
 opt.list = true
 
 -- Define invisible characters
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+opt.listchars = { tab = '› ', trail = '·', extends = '…', precedes = '…', nbsp = '␣' }
 
 -- Enable smooth scrolling
 opt.smoothscroll = true
@@ -145,8 +145,9 @@ opt.sessionoptions = {
   'folds', -- Save folds
 }
 
-local hour = os.date('*t').hour
-vim.o.background = (hour >= 7 and hour < 19) and 'light' or 'dark'
+-- local hour = os.date('*t').hour
+-- vim.o.background = (hour >= 7 and hour < 19) and 'light' or 'dark'
+opt.background = 'dark'
 
 -- Terminal Undercurl Support
 vim.cmd [[let &t_Cs = "\e[4:3m"]]
