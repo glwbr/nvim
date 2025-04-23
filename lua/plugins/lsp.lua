@@ -27,8 +27,21 @@ return {
         cssls = {},
         dockerls = {},
         gopls = {
-          completeUimported = true,
+          completeUnimported = true,
           usePlaceholders = true,
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true,
+              },
+              staticcheck = true,
+              gofumpt = false,
+            },
+          },
+          on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
         },
         html = {},
         jsonls = {},
