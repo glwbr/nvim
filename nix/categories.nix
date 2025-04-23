@@ -19,6 +19,10 @@
         lsp = [ gopls ];
         debug = [ delve ];
         lint = [ golangci-lint ];
+        formatter = [
+          gofumpt
+          gotools
+        ];
       };
       docker = {
         lint = [ hadolint ];

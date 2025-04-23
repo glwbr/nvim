@@ -23,10 +23,15 @@ return {
     formatters = {
       ['biome-check'] = { append_args = { '--unsafe' } },
       prettierd = { require_cwd = true },
+      gofumpt = {
+        command = 'gofumpt',
+        args = { '-extra', '-w', '$FILENAME' },
+        stdin = false,
+      },
+      --['goimports-reviser'] = { prepend_args = { '-rm-unused' } },
     },
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace' },
-      go = { 'goimports', 'gofmt' },
       lua = { 'stylua' },
       nix = { 'nixfmt' },
       javascript = { 'prettierd' },
@@ -35,6 +40,7 @@ return {
       typescriptreact = { 'prettierd' },
       json = { 'prettierd' },
       jsonc = { 'prettierd' },
+      go = { 'goimports', 'gofumpt' },
       markdown = function(bufnr)
         return { utils.first(bufnr, 'prettierd', 'prettier'), 'injected' }
       end,
