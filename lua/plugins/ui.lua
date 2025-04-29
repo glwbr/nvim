@@ -25,4 +25,10 @@ return {
       end
     end,
   },
+  {
+    'brenoprata10/nvim-highlight-colors',
+    opts = {
+      render = 'foreground',
+    },
+  },
 }
