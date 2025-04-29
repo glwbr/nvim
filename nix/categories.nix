@@ -106,6 +106,7 @@
         name = "rose-pine";
       }
       mini-icons
+      nvim-highlight-colors
     ];
   };
 
