@@ -40,6 +40,7 @@
       web = {
         lsp = [
           vtsls
+          nodejs-slim_23
           tailwindcss-language-server
           nodePackages.vscode-langservers-extracted
         ];
@@ -55,6 +56,8 @@
   startupPlugins = with pkgs.vimPlugins; {
     core = [
       blink-cmp
+      blink-copilot
+      copilot-lua
       conform-nvim
       lazy-nvim
       {
