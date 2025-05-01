@@ -163,3 +163,18 @@ usercmd('EslintFix', function()
     vim.fn.chanclose(job_id, 'stdin')
   end
 end, { desc = 'Fix ESLint issues in current buffer' })
+
+autocmd('User', {
+  pattern = 'BlinkCmpMenuOpen',
+  callback = function()
+    require('copilot.suggestion').dismiss()
+    vim.b.copilot_suggestion_hidden = true
+  end,
+})
+
+autocmd('User', {
+  pattern = 'BlinkCmpMenuClose',
+  callback = function()
+    vim.b.copilot_suggestion_hidden = false
+  end,
+})
