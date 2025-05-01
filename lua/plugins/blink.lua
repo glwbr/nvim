@@ -19,7 +19,8 @@ return {
     snippets = { preset = 'luasnip' },
     completion = {
       menu = {
-        border = 'rounded',
+        auto_show = false,
+        border = 'none',
         draw = {
           padding = { 1, 1 },
           columns = {
