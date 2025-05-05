@@ -12,11 +12,22 @@ return {
   {
     'echasnovski/mini.icons',
     opts = {
+      style = 'glyph',
       file = {
         ['.keep'] = { glyph = '󰊢', hl = 'MiniIconsGrey' },
+        ['.bashrc'] = { glyph = '󱆃' },
+        ['.zshrc'] = { glyph = '' },
+        ['lazy.lua'] = { glyph = '󰒲', hl = 'MiniIconsAzure' },
+        ['.editorconfig'] = { glyph = '', hl = 'MiniIconsGrey' },
+        ['autocmd.lua'] = { glyph = '󰁨', hl = 'MiniIconsYellow' },
         ['devcontainer.json'] = { glyph = '', hl = 'MiniIconsAzure' },
       },
       filetype = { dotenv = { glyph = '', hl = 'MiniIconsYellow' } },
+      lsp = {
+        ['function'] = { glyph = '󰡱' },
+        string = { glyph = '󰉾', hl = 'MiniIconsGreen' },
+        copilot = { glyph = '', hl = 'MiniIconsRed' },
+      },
     },
     init = function()
       package.preload['nvim-web-devicons'] = function()
