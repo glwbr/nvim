@@ -39,8 +39,8 @@ map('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result
 map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
 
 -- Editing Keymaps
-map('v', '<', '<gv')
-map('v', '>', '>gv')
+map('v', '<', '<gv', { desc = 'Indent Left' })
+map('v', '>', '>gv', { desc = 'Indent Right' })
 map('n', '<leader>d', '"_d', { desc = 'Delete (no clipboard)' })
 map('v', '<leader>d', '"_d', { desc = 'Delete (no clipboard)' })
 map('n', '<leader>y', '"+y', { desc = 'Yank to clipboard' })
@@ -52,6 +52,14 @@ map('n', 'J', 'mzJ`z', { desc = 'Join Lines' })
 map('n', '+', '<C-a>', { desc = 'Increment numbers', noremap = true })
 map('n', '-', '<C-x>', { desc = 'Decrement numbers', noremap = true })
 map('v', '+', 'g<C-a>', { desc = 'Increment numbers', noremap = true })
+map('n', '<leader>sr', '<cmd>%s/\\<<c-r><c-w>\\>/', { desc = 'Replace word under cursor' })
+
+-- On empty or whitespace-only lines, replace the line using "_cc to preserve indentation
+-- On non-empty lines, behave like a normal 'i' insert.
+map('n', 'i', function()
+  local line = vim.fn.getline '.'
+  return line:match '^%s*$' and [["_cc]] or 'i'
+end, { desc = 'Smart insert: preserves indent on blank lines', expr = true, noremap = true })
 
 -- Utility Keymaps
 map('n', '<leader><leader>', function()
