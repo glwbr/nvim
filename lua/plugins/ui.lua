@@ -3,11 +3,22 @@ return {
     'j-hui/fidget.nvim',
     event = 'LspAttach',
     opts = {
-      notification = { window = { winblend = 0 } },
+      notification = {
+        poll_rate = 100,
+        filter = vim.log.levels.INFO,
+        view = { stack_upwards = false },
+        window = { winblend = 0, border = 'none' },
+      },
+
+      progress = {
+        ignore_done_already = true,
+        ignore_empty_message = true,
+        display = {
+          done_icon = '',
+          progress_icon = { pattern = 'dots_pulse' },
+        },
+      },
     },
-    config = function(_, opts)
-      require('fidget').setup(opts)
-    end,
   },
   {
     'b0o/incline.nvim',
