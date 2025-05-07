@@ -80,10 +80,6 @@
 
     qualityOfLife = [
       fidget-nvim
-      {
-        plugin = incline-nvim;
-        name = "incline";
-      }
       snacks-nvim
       gitsigns-nvim
       nvim-lint
