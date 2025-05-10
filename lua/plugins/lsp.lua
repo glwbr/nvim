@@ -38,7 +38,7 @@ return {
               gofumpt = false,
             },
           },
-          on_attach = function(client, bufnr)
+          on_attach = function(client)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
           end,
@@ -212,12 +212,9 @@ return {
 
     local lspconfig = require 'lspconfig'
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
-
     if catUtils.isNixCats then
       for server, config in pairs(opts.servers) do
-        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
         lspconfig[server].setup(config)
       end
     else
@@ -233,7 +230,7 @@ return {
         handlers = {
           function(server)
             local config = opts.servers[server] or {}
-            config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+            config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
             lspconfig[server].setup(config)
           end,
         },
