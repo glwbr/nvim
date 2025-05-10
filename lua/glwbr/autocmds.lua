@@ -16,6 +16,15 @@ autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   desc = 'Reload the file when changed externally',
 })
 
+autocmd("FileType", {
+  group = augroup("wrap_spell"),
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
+
 autocmd('FileType', {
   group = augroup 'close_with_esc',
   pattern = {
