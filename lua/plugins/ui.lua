@@ -24,17 +24,23 @@ return {
     'b0o/incline.nvim',
     event = 'BufReadPre',
     opts = {
-      highlight = {
-        groups = {
-          InclineNormal = { default = true, group = 'lualine_a_normal' },
-          InclineNormalNC = { default = true, group = 'Comment' },
-        },
-      },
       window = {
         margin = { horizontal = 1, vertical = 0 },
         placement = { horizontal = 'right', vertical = 'top' },
         overlap = { winbar = true, statusline = true },
         padding = 0,
+        winhighlight = {
+          active = {
+            EndOfBuffer = 'None',
+            Normal = 'Normal',
+            Search = 'None',
+          },
+          inactive = {
+            EndOfBuffer = 'None',
+            Normal = 'Normal',
+            Search = 'None',
+          },
+        },
       },
       render = function(ctx)
         local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(ctx.buf), ':t')
