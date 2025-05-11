@@ -93,17 +93,16 @@
 
     ui = [
       {
-        plugin = catppuccin-nvim;
-        name = "catppuccin";
+        plugin = rose-pine;
+        name = "rose-pine";
       }
       {
         plugin = kanagawa-paper-nvim;
         name = "kanagawa-paper";
       }
-      {
-        plugin = rose-pine;
-        name = "rose-pine";
-      }
+      colorful-menu-nvim
+      incline-nvim
+      kanagawa-nvim
       mini-icons
       nvim-highlight-colors
     ];
