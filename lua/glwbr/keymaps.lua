@@ -37,21 +37,31 @@ map({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, 
 
 -- List management
 map('n', '<leader>xl', function()
-  local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-  if not success and err then
+  local ok, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+  if not ok then
     vim.notify(err, vim.log.levels.ERROR)
   end
 end, { desc = 'Location List' })
 
 map('n', '<leader>xq', function()
-  local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-  if not success and err then
+  local ok, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+  if not ok then
     vim.notify(err, vim.log.levels.ERROR)
   end
 end, { desc = 'Quickfix List' })
 
-map('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
-map('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
+map('n', '[q', function()
+  local ok, err = pcall(vim.cmd.cprev)
+  if not ok then
+    vim.notify(err, vim.log.levels.ERROR)
+  end
+end, { desc = 'Previous Quickfix' })
+map('n', ']q', function()
+  local ok, err = pcall(vim.cmd.cnext)
+  if not ok then
+    vim.notify(err, vim.log.levels.ERROR)
+  end
+end, { desc = 'Next Quickfix' })
 
 -- Search navigation
 map('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
