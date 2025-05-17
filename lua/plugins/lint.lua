@@ -11,6 +11,7 @@ return {
       typescript = { 'eslint_d' },
       javascriptreact = { 'eslint_d' },
       typescriptreact = { 'eslint_d' },
+      vue = { 'eslint_d' },
     }
 
     vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave', 'BufEnter' }, {
