@@ -72,8 +72,8 @@ opt.grepprg = 'rg --vimgrep'                        -- Use ripgrep for external 
 opt.grepformat = '%f:%l:%c:%m'                      -- Format for grep output parsing
 
 -- Completion Menu
--- opt.pumblend = 10                                   -- Slight transparency for popup menu
--- opt.pumheight = 10                                  -- Limit height of popup menu
+opt.pumblend = 10                                   -- Slight transparency for popup menu
+opt.pumheight = 10                                  -- Limit height of popup menu
 opt.completeopt = 'menu,menuone,noselect'           -- Completion behavior options
 
 -- Indentation & Text Formatting
