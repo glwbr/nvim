@@ -1,5 +1,4 @@
-local utils = require 'utils'
-local map = utils.map
+local map = require('utils').map
 local catUtils = require 'utils.cats'
 
 return {
@@ -133,20 +132,20 @@ return {
         update_in_insert = false,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN] = '',
             [vim.diagnostic.severity.INFO] = '',
             [vim.diagnostic.severity.HINT] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.ERROR] = '',
           },
           numhl = {
-            [vim.diagnostic.severity.WARN] = 'WarningMsg',
-            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
             [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
             [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
           },
         },
         float = {
-          source = true,
+          source = 'if_many',
           border = 'rounded',
           style = 'minimal',
           focusable = true,
@@ -156,6 +155,7 @@ return {
       },
     }
   end,
+
   config = function(_, opts)
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
