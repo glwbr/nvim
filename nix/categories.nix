@@ -7,22 +7,13 @@
   extraWrapperArgs = { };
 
   lspsAndRuntimeDeps = with pkgs; {
-    core = [
-      universal-ctags
-      ripgrep
-      fd
-      jq
-      wl-clipboard
-    ];
+    core = [ universal-ctags ripgrep fd jq wl-clipboard ];
     languages = {
       go = {
         lsp = [ gopls ];
         debug = [ delve ];
         lint = [ golangci-lint ];
-        formatter = [
-          gofumpt
-          gotools
-        ];
+        formatter = [ gofumpt gotools ];
       };
       docker = {
         lint = [ hadolint ];
@@ -38,17 +29,9 @@
         formatter = [ nixfmt-rfc-style ];
       };
       web = {
-        lsp = [
-          vtsls
-          nodejs-slim_23
-          tailwindcss-language-server
-          nodePackages.vscode-langservers-extracted
-        ];
-        lint = [
-          nodePackages.jsonlint
-          nodePackages.eslint_d
-        ];
-        formatter = [ prettierd ];
+        lsp = [ vtsls nodejs-slim_23 tailwindcss-language-server nodePackages.vscode-langservers-extracted yaml-language-server ];
+        lint = [ eslint_d yamllint ];
+        formatter = [ prettierd typst-fmt yamlfmt ];
       };
     };
   };
@@ -60,46 +43,24 @@
       copilot-lua
       conform-nvim
       lazy-nvim
-      {
-        plugin = luasnip;
-        name = "LuaSnip";
-      }
+      { plugin = luasnip; name = "LuaSnip"; }
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
       plenary-nvim
     ];
 
     navigationAndWorkflow = [
-      {
-        plugin = harpoon2;
-        name = "harpoon";
-      }
+      { plugin = harpoon2; name = "harpoon"; }
       tmux-navigator
       oil-nvim
     ];
 
-    qualityOfLife = [
-      fidget-nvim
-      snacks-nvim
-      gitsigns-nvim
-      nvim-lint
-      todo-comments-nvim
-    ];
-
-    pluginUtilities = [
-      friendly-snippets
-      lazydev-nvim
-    ];
+    qualityOfLife = [ fidget-nvim snacks-nvim gitsigns-nvim nvim-lint todo-comments-nvim ];
+    pluginUtilities = [ friendly-snippets lazydev-nvim ];
 
     ui = [
-      {
-        plugin = rose-pine;
-        name = "rose-pine";
-      }
-      {
-        plugin = kanagawa-paper-nvim;
-        name = "kanagawa-paper";
-      }
+      { plugin = rose-pine; name = "rose-pine"; }
+      { plugin = kanagawa-paper-nvim; name = "kanagawa-paper"; }
       colorful-menu-nvim
       incline-nvim
       kanagawa-nvim

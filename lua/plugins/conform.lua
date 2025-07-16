@@ -58,6 +58,8 @@ return {
       json = { 'prettierd' },
       jsonc = { 'prettierd' },
       go = { 'goimports', 'gofumpt' },
+      typst = { 'typstfmt' },
+      yaml = { 'yamlfmt' },
       markdown = function(bufnr)
         return { first_available(bufnr, 'prettierd', 'prettier'), 'injected' }
       end,
