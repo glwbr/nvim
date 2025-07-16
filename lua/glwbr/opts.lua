@@ -2,11 +2,12 @@
 local g = vim.g
 local opt = vim.opt
 
+-- stylua: ignore start
 -- Display Settings
 opt.termguicolors = true                            -- Enable true color support
 opt.background = 'dark'                             -- Set dark color theme
 opt.cursorline = true                               -- Highlight the current cursor line
-opt.colorcolumn = '120'                             -- Highlight column for line length guidance
+-- opt.colorcolumn = '120'                          -- Highlight column for line length guidance
 opt.wrap = false                                    -- Disable automatic text wrapping
 
 -- Line Numbers
@@ -16,7 +17,7 @@ opt.relativenumber = true                           -- Show relative line number
 -- Invisible Characters
 opt.list = true                                     -- Show invisible characters
 opt.listchars = {                                   -- Define how invisible characters appear
-  tab = '› ',                                       -- Tab character
+  tab = '» ',                                       -- Tab character
   trail = '·',                                      -- Trailing spaces
   extends = '…',                                    -- Line continues beyond screen
   precedes = '…',                                   -- Line continues before screen
@@ -121,3 +122,18 @@ opt.spelllang = { 'en' }                            -- Set spelling language to 
 
 -- local hour = os.date('*t').hour
 -- vim.o.background = (hour >= 7 and hour < 19) and 'light' or 'dark'
+-- stylua: ignore end
+
+if vim.env.SSH_CONNECTION then
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+      ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste '+',
+      ['*'] = require('vim.ui.clipboard.osc52').paste '*',
+    },
+  }
+end
