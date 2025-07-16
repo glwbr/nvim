@@ -44,6 +44,9 @@ return {
         args = { '-extra', '-w', '$FILENAME' },
         stdin = false,
       },
+      yamlfmt = {
+        prepend_args = { '-formatter', 'indent=2,include_document_start=true,retain_line_breaks_single=true' },
+      },
       --['goimports-reviser'] = { prepend_args = { '-rm-unused' } },
     },
 
