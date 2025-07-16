@@ -27,13 +27,15 @@ return {
     },
 
     format_on_save = function(bufnr)
-      local disable_filetypes = { c = true, cpp = true }
-      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-        return
-      end
-      return { lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype] }
-    end,
+      local disabled_filetypes = { c = true, cpp = true, nix = true }
+      local filetype = vim.bo[bufnr].filetype
 
+      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat or disabled_filetypes[filetype] then
+        return false
+      end
+
+      return { lsp_fallback = true }
+    end,
     formatters = {
       ['biome-check'] = { append_args = { '--unsafe' } },
       prettierd = { require_cwd = true },
