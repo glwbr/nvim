@@ -11,10 +11,11 @@ return {
       typescript = { 'eslint_d' },
       javascriptreact = { 'eslint_d' },
       typescriptreact = { 'eslint_d' },
+      yaml = { 'yamllint' },
       vue = { 'eslint_d' },
     }
 
-    vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave', 'BufEnter' }, {
+    vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
       callback = function()
         require('lint').try_lint()
       end,
