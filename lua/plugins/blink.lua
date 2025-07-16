@@ -26,7 +26,8 @@ return {
         border = 'none',
         draw = {
           padding = { 1, 1 },
-          columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+          -- columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+          columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon' } },
           components = {
             label = {
               text = function(ctx)
@@ -39,7 +40,12 @@ return {
           },
         },
       },
-      documentation = { window = { border = 'none' } },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 250,
+        treesitter_highlighting = true,
+        window = { border = 'none' },
+      },
       ghost_text = { enabled = true, show_with_menu = false },
       list = { max_items = 30 },
     },
