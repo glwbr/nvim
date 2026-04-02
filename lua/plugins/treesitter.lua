@@ -1,10 +1,11 @@
-local catUtils = require 'utils.cats'
-
 return {
   'nvim-treesitter/nvim-treesitter',
-  build = catUtils.ifNotNix ':TSUpdate',
-  opts = {
-    ensure_installed = catUtils.ifNotNix {
+  lazy = false,
+  build = ':TSUpdate',
+  config = function()
+    require('nvim-treesitter').setup {}
+
+    require('nvim-treesitter').install {
       'bash',
       'c',
       'css',
@@ -14,7 +15,6 @@ return {
       'html',
       'javascript',
       'json',
-      'jsonc',
       'lua',
       'luadoc',
       'markdown',
@@ -27,16 +27,17 @@ return {
       'vim',
       'vimdoc',
       'yaml',
-    },
-    auto_install = catUtils.ifNotNix(true),
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = { 'ruby' },
-    },
-    indent = { enable = true, disable = { 'ruby' } },
-  },
-  config = function(_, opts)
-    require('nvim-treesitter.install').prefer_git = true
-    require('nvim-treesitter.configs').setup(opts)
+    }
+
+    vim.api.nvim_create_autocmd('FileType', {
+      callback = function(args)
+        local ft = args.match
+        local lang = vim.treesitter.language.get_lang(ft) or ft
+        if pcall(vim.treesitter.language.inspect, lang) then
+          vim.treesitter.start(args.buf)
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
+    })
   end,
 }
