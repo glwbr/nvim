@@ -1,20 +1,20 @@
----@param bufnr integer
----@param ... string
----@return string
-local first_available = function(bufnr, ...)
-  for i = 1, select('#', ...) do
-    local formatter = select(i, ...)
-    if require('conform').get_formatter_info(formatter, bufnr).available then
-      return formatter
-    end
-  end
-  return select(1, ...)
-end
-
 return {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo' },
+  keys = {
+    {
+      '<leader>tf',
+      function()
+        vim.g.disable_autoformat = not vim.g.disable_autoformat
+        Snacks.notify(
+          'Format on save: ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled'),
+          { level = vim.g.disable_autoformat and 'warn' or 'info' }
+        )
+      end,
+      desc = 'Toggle Format on Save',
+    },
+  },
   opts = {
     notify_on_error = false,
     log_level = vim.log.levels.DEBUG,
@@ -37,7 +37,10 @@ return {
       return { lsp_fallback = true }
     end,
     formatters = {
-      ['biome-check'] = { append_args = { '--unsafe' } },
+      ['biome-check'] = {
+        require_cwd = true,
+        append_args = { '--unsafe' },
+      },
       prettierd = { require_cwd = true },
       gofumpt = {
         command = 'gofumpt',
@@ -47,25 +50,21 @@ return {
       yamlfmt = {
         prepend_args = { '-formatter', 'indent=2,include_document_start=true,retain_line_breaks_single=true' },
       },
-      --['goimports-reviser'] = { prepend_args = { '-rm-unused' } },
     },
 
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace' },
       lua = { 'stylua' },
       nix = { 'nixfmt' },
-      javascript = { 'prettierd' },
-      typescript = { 'prettierd' },
-      javascriptreact = { 'prettierd' },
-      typescriptreact = { 'prettierd' },
-      json = { 'prettierd' },
-      jsonc = { 'prettierd' },
+      javascript = { 'biome-check', 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'biome-check', 'prettierd', 'prettier', stop_after_first = true },
+      javascriptreact = { 'biome-check', 'prettierd', 'prettier', stop_after_first = true },
+      typescriptreact = { 'biome-check', 'prettierd', 'prettier', stop_after_first = true },
+      json = { 'biome-check', 'prettierd', 'prettier', stop_after_first = true },
+      jsonc = { 'biome-check', 'prettierd', 'prettier', stop_after_first = true },
       go = { 'goimports', 'gofumpt' },
-      typst = { 'typstfmt' },
       yaml = { 'yamlfmt' },
-      markdown = function(bufnr)
-        return { first_available(bufnr, 'prettierd', 'prettier'), 'injected' }
-      end,
+      markdown = { 'prettierd', 'prettier', stop_after_first = true },
     },
   },
 }
