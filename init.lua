@@ -1,5 +1,35 @@
-require('utils.cats').setup { non_nix_value = true }
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local out = vim.fn.system {
+    'git', 'clone', '--filter=blob:none',
+    '--branch=stable',
+    'https://github.com/folke/lazy.nvim.git',
+    lazypath,
+  }
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
+      { out, 'WarningMsg' },
+    }, true, {})
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
-require 'glwbr'
+-- Core configuration
+require 'core.opts'
+require 'core.keymaps'
+require 'core.autocmds'
 
--- vim: ts=2 sts=2 sw=2 et
+-- Plugin manager
+require('lazy').setup({
+  { import = 'plugins' },
+}, {
+  change_detection = { notify = false },
+  lockfile = vim.fn.stdpath 'config' .. '/lazy-lock.json',
+  performance = {
+    rtp = {
+      disabled_plugins = { 'tohtml', 'tutor' },
+    },
+  },
+})

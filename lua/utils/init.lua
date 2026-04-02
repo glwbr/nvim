@@ -1,5 +1,3 @@
--- Gener(al/ic)? helper functions
-
 local M = {}
 
 function M.map(mode, lhs, rhs, opts)
