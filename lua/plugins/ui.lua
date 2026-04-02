@@ -9,12 +9,11 @@ return {
         view = { stack_upwards = false },
         window = { winblend = 0, border = 'none' },
       },
-
       progress = {
         ignore_done_already = true,
         ignore_empty_message = true,
         display = {
-          done_icon = '',
+          done_icon = '',
           progress_icon = { pattern = 'dots_pulse' },
         },
       },
@@ -30,16 +29,8 @@ return {
         overlap = { winbar = true, statusline = true },
         padding = 0,
         winhighlight = {
-          active = {
-            EndOfBuffer = 'None',
-            Normal = 'Normal',
-            Search = 'None',
-          },
-          inactive = {
-            EndOfBuffer = 'None',
-            Normal = 'Normal',
-            Search = 'None',
-          },
+          active = { EndOfBuffer = 'None', Normal = 'Normal', Search = 'None' },
+          inactive = { EndOfBuffer = 'None', Normal = 'Normal', Search = 'None' },
         },
       },
       render = function(ctx)
@@ -54,36 +45,11 @@ return {
 
         return {
           icon and { icon, guifg = color, ' ' } or '',
-          { filename, gui = modified and 'bold' or 'bold' },
-          { modified and ' ' .. '*' or '', guifg = '#d19a66' }, -- •
+          { filename, gui = 'bold' },
+          { modified and ' *' or '', guifg = '#d19a66' },
         }
       end,
     },
-  },
-  {
-    'echasnovski/mini.icons',
-    opts = {
-      style = 'glyph',
-      file = {
-        ['.keep'] = { glyph = '󰊢', hl = 'MiniIconsGrey' },
-        ['.bashrc'] = { glyph = '󱆃' },
-        ['.zshrc'] = { glyph = '' },
-        ['lazy.lua'] = { glyph = '󰒲', hl = 'MiniIconsAzure' },
-        ['autocmd.lua'] = { glyph = '󰁨', hl = 'MiniIconsYellow' },
-        ['devcontainer.json'] = { glyph = '', hl = 'MiniIconsAzure' },
-      },
-      filetype = { dotenv = { glyph = '', hl = 'MiniIconsYellow' } },
-      lsp = {
-        string = { glyph = '󰉾', hl = 'MiniIconsGreen' },
-        copilot = { glyph = '', hl = 'MiniIconsRed' },
-      },
-    },
-    init = function()
-      package.preload['nvim-web-devicons'] = function()
-        require('mini.icons').mock_nvim_web_devicons()
-        return package.loaded['nvim-web-devicons']
-      end
-    end,
   },
   {
     'brenoprata10/nvim-highlight-colors',
@@ -92,6 +58,26 @@ return {
       virtual_symbol = '■',
       enable_tailwind = false,
       enable_named_colors = false,
+    },
+  },
+  {
+    'folke/which-key.nvim',
+    event = 'VimEnter',
+    ---@module 'which-key'
+    ---@type wk.Opts
+    ---@diagnostic disable-next-line: missing-fields
+    opts = {
+      delay = 200,
+      icons = { mappings = false },
+      spec = {
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>x', group = 'Li[x]ts' },
+        { '<leader>w', group = '[W]indow' },
+        { '<leader>g', group = '[G]it' },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>r', group = '[R]ename/Replace' },
+        { 'g', group = '[G]o to' },
+      },
     },
   },
 }
