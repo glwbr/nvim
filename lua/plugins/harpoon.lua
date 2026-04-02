@@ -1,6 +1,4 @@
-local utils = require 'utils'
-local extensions = require 'extensions.harpoon'
-local map = utils.map
+local map = require('utils').map
 
 return {
   'ThePrimeagen/harpoon',
@@ -29,7 +27,39 @@ return {
     end, { desc = 'Add File to Harpoon List' })
 
     map('n', '<leader>e', function()
-      extensions.toggle_picker(harpoon:list())
+      local harpoon_files = harpoon:list()
+      local function generate_items()
+        local items = {}
+        for _, item in ipairs(harpoon_files.items) do
+          table.insert(items, {
+            text = item.value,
+            file = item.value,
+          })
+        end
+        return items
+      end
+
+      Snacks.picker {
+        finder = generate_items,
+        title = 'Harpoon',
+        layout = { preset = 'vscode' },
+        win = {
+          input = {
+            keys = {
+              ['<C-x>'] = { 'delete', mode = { 'i' } },
+              ['dd'] = { 'delete', mode = { 'n', 'v' } },
+            },
+          },
+        },
+        actions = {
+          delete = function(picker, item)
+            if item.idx then
+              table.remove(harpoon_files.items, item.idx)
+              picker:find { refresh = true }
+            end
+          end,
+        },
+      }
     end, { desc = 'Open Harpoon Quick Menu' })
   end,
 }

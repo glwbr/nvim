@@ -26,7 +26,6 @@ return {
         border = 'none',
         draw = {
           padding = { 1, 1 },
-          -- columns = { { 'kind_icon' }, { 'label', gap = 1 } },
           columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon' } },
           components = {
             label = {
