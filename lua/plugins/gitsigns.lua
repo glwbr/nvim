@@ -1,12 +1,8 @@
-local utils = require 'utils'
-local catUtils = require 'utils.cats'
-
-local map = utils.map
+local map = require('utils').map
 
 return {
   'lewis6991/gitsigns.nvim',
   event = 'BufReadPost',
-  enabled = catUtils.enableForCategory 'qualityOfLife',
   opts = {
     current_line_blame = true,
     current_line_blame_opts = { delay = 500 },
@@ -40,7 +36,9 @@ return {
         end
       end, { desc = 'Git Previous Hunk' })
 
-      map('n', '<leader>gD', gs.diffthis, { desc = '[G]it [D]iff This' })
+      map('n', '<leader>gD', function()
+        gs.diffthis('', { split = 'belowright' })
+      end, { desc = 'Git Diff This' })
     end,
   },
 }
