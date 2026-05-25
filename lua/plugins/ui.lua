@@ -13,6 +13,7 @@ return {
         ignore_done_already = true,
         ignore_empty_message = true,
         display = {
+          done_ttl = 1,
           done_icon = '',
           progress_icon = { pattern = 'dots_pulse' },
         },
