@@ -1,47 +1,61 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <p>A Neovim configuration built with Nix flakes and nixCats</p>
+  <p>A Neovim configuration</p>
   <p><em>but, I'm a corgi person :dog:</em></p>
   <img src="https://res.cloudinary.com/djb3ju61n/image/upload/v1739062930/corgi_glass.gif" alt="Corgi with glasses" height="300">
 </div>
 
-## :thought_balloon: Philosophy
+## Requirements
 
-This configuration embraces the power of Nix for dependency management while maintaining the flexibility of Lua for Neovim configuration. While projects like nixvim offer a complete Nix-based approach, nixCats provides an excellent middle ground - allowing us to:
+- **Neovim 0.12+**
+- **git**
+- **tree-sitter-cli** — required by nvim-treesitter to compile parsers
+- **node**, **go**, and other runtimes as needed by the LSP servers and linters you use
 
-- Manage dependencies efficiently with Nix
-- Keep our existing Lua configurations
-- Avoid the need to refactor everything into Nix expressions
+## Installation
 
-The goal is to maintain a minimal yet fully functional setup that prioritizes simplicity without sacrificing capabilities.
+**1. Clone**
 
-## :sparkles: Features
-
-- Built using nixCats and Nix flakes
-- Pure Lua configuration
-- Simple dependency management
-- Compatibility with standard Neovim configurations with lazy.nvim
-
-## :rocket: Quick Start
-
-Run this configuration directly using:
-
-```nix
-nix run "https://github.com/glwbr/nvim"
+```sh
+git clone https://github.com/glwbr/nvim ~/.config/nvim
 ```
 
-## :arrows_counterclockwise: Project Status
+**2. Install tree-sitter-cli**
 
-This configuration is actively maintained and evolving. While it's already functional for daily use, I'm constantly learning and making improvements. Contributions and suggestions are welcome!
+```sh
+curl -L "https://github.com/tree-sitter/tree-sitter/releases/latest/download/tree-sitter-linux-x64.gz" \
+  | gunzip -c > ~/.local/bin/tree-sitter
+chmod +x ~/.local/bin/tree-sitter
+```
 
-## :heart: Acknowledgments
+Make sure `~/.local/bin` is in your `PATH`.
 
-Special thanks to [BirdeeHub](https://github.com/BirdeeHub) for creating nixCats, which makes this approach possible.
+**3. Open Neovim**
 
-## :handshake: Contributing
+```sh
+nvim
+```
 
-Feel free to share your ideas and feedback
+lazy.nvim will bootstrap itself and install all plugins on first launch. Mason will install LSP servers, formatters, and linters automatically.
+
+## Plugin management
+
+Plugins are locked to specific commits via `lazy-lock.json`. To update:
+
+```
+:Lazy update
+```
+
+To restore pinned versions after cloning:
+
+```
+:Lazy restore
+```
+
+## Contributing
+
+Feel free to share ideas and feedback.
 
 <!-- IMAGES -->
 [corgi_glass]: "https://res.cloudinary.com/djb3ju61n/image/upload/v1739062930/corgi_glass.gif"

@@ -42,7 +42,7 @@ return {
           'golangci-lint',
           'hadolint',
           'eslint_d',
-          'yamllint',
+          --'yamllint',
         },
       },
     },
