@@ -1,5 +1,4 @@
 local utils = require 'utils'
-local catUtils = require 'utils.cats'
 
 return {
   {
@@ -63,7 +62,7 @@ return {
       functionStyle = {},
       keywordStyle = {},
       statementStyle = {},
-      cache = catUtils.ifNotNix(true),
+      cache = true,
       dim_inactive = true,
       colors = {
         palette = { winterYellow = '#302e30' },

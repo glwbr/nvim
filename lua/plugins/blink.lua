@@ -1,6 +1,6 @@
 return {
   'saghen/blink.cmp',
-  version = '*',
+  version = '1.*',
   dependencies = {
     'fang2hou/blink-copilot',
     'rafamadriz/friendly-snippets',
