@@ -2,6 +2,9 @@ local catUtils = require 'utils.cats'
 
 return {
   'nvim-treesitter/nvim-treesitter',
+  -- Pin to master: the `main` branch removed the `nvim-treesitter.configs`
+  -- module and the classic `.setup()` API this config relies on (below).
+  branch = 'master',
   build = catUtils.ifNotNix ':TSUpdate',
   opts = {
     ensure_installed = catUtils.ifNotNix {
